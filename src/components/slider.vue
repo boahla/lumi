@@ -3,7 +3,7 @@
     <v-row
       justify="center">
       <v-col
-        cols="8">
+        cols="12">
         <div>
           <h2>{{ title }}</h2>
         </div>
@@ -69,10 +69,9 @@
     methods: {
       chooseItem() {
         console.log('chooseItem');
-        this.$router.push('/about');
+        this.$router.push('/Check');
       },
       hoverItem() {
-        console.log('hoverItem');
       },
     },
   }

@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
+import Home from '../views/Home.vue'
 import About from '../views/About.vue'
+import Check from '../views/Check.vue'
 
 Vue.use(VueRouter)
 
@@ -18,6 +19,15 @@ const routes = [
     },
   },
   {
+    path: '/check',
+    name: 'Check',
+    components: {
+      header: Header,
+      footer: Footer,
+      default: Check,
+    },
+  },
+  {
     path: '/about',
     name: 'About',
     components: {
@@ -25,6 +35,26 @@ const routes = [
       footer: Footer,
       default: About,
     },
+    children: [
+      {
+        path: 'class',
+        name: 'Class',
+        components: {
+          header: Header,
+          footer: Footer,
+          default: require('@/views/Class').default,
+        },
+      },
+      {
+        path: 'introduce',
+        name: 'Introduce',
+        components: {
+          header: Header,
+          footer: Footer,
+          default: require('@/views/Introduce').default,
+        },
+      },
+    ],
   }
 ]
 
