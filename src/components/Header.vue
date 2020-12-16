@@ -16,46 +16,84 @@
         filled
         dense
         rounded
-        hide-details=""></v-text-field>
+        hide-details=""
+        placeholder="검색어를 입력하세요."
+        style="padding: 0px 4%;"></v-text-field>
       <!-- <v-btn
         icon
         >
         <v-icon>mdi-magnify</v-icon>
       </v-btn> -->
       <v-btn
+        v-if="!login"
         depressed
         large
         class="ma-2 white--text"
-        color="#BDBDBD">
+        color="#BDBDBD"
+        @click="$router.push('/signup')">
         회원가입
       </v-btn>
       <v-btn
+        v-if="!login"
         outlined
         large
         class="ma-2"
         color="#BDBDBD"
-        @click="login = true">
+        @click="loginFlag = true">
         로그인
       </v-btn>
+      <v-menu
+        bottom
+        left
+        offset-y
+        min-width="200px"
+        max-width="300px"
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-avatar
+            v-if="login"
+            v-bind="attrs"
+            v-on="on">
+            <img
+              src="https://cdn.vuetifyjs.com/images/john.jpg"
+              alt="John"
+            >
+          </v-avatar>
+        </template>
+        <v-divider color="#eee"></v-divider>
+        <v-list>
+            <v-list-item><h3>{{user.name}}</h3></v-list-item>
+            <v-list-item>{{user.email}}</v-list-item>
+            <v-divider></v-divider>
+            <v-list-item link @click="$router.push('/VideoList')">
+              <v-icon class="mr-2" color="#595959">mdi-arrow-up-bold-box-outline</v-icon>
+              동영상 분석
+            </v-list-item>
+            <v-list-item link @click="$router.push('/SubtitleList')">
+              <v-icon class="mr-2" color="#595959">mdi-message-text</v-icon>
+              자막 분석
+            </v-list-item>
+        </v-list>
+      </v-menu>
     </v-app-bar>
     <v-dialog
-      v-model="login"
+      v-model="loginFlag"
       width="30%">
       <v-card>
         <v-card-title style="width: 100%; text-align: right;">
           <v-spacer></v-spacer>
-          <v-icon @click="login = false;">mdi-close</v-icon>
+          <v-icon @click="loginFlag = false;">mdi-close</v-icon>
         </v-card-title>
         <v-divider></v-divider>
         <v-card-text
           style="padding: 10%;">
           <v-text-field
-            v-model="user.id"
+            v-model="loginUser.id"
             prepend-inner-icon="mdi-account"
             outlined>
           </v-text-field>
           <v-text-field
-            v-model="user.pass"
+            v-model="loginUser.pass"
             prepend-inner-icon="mdi-account-lock"
             :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
             :type="show ? 'text' : 'password'"
@@ -72,6 +110,7 @@
         </v-card-text>
       </v-card>
     </v-dialog>
+    
   </v-container>
 </template>
 
@@ -80,12 +119,19 @@
     name: 'Header',
     data() {
       return {
-        login: false,
+        loginFlag: false,
+        signupFlag: true,
+        login: true,
         show: false,
-        user: {
+        loginUser: {
           id: '',
           pass: '',
-        }
+        },
+        user: {
+          name: '루미',
+          email: 'lumi@didicast.com',
+          img: '',
+        },
       }
     },
   }
@@ -97,6 +143,6 @@
   z-index: 2;
 }
 .appBar {
-  padding: 0px 10%;
+  padding: 0px 15%;
 }
 </style>

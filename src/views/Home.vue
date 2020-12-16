@@ -20,19 +20,22 @@
       title="추천 클래스"
       cardWidth="325"
       cardHeight="300"
-      :items="slides">
+      :items="slides"
+      moveTo="/Video">
     </slider>
     <slider
       title="파트너 소개"
       cardWidth="440"
       cardHeight="300"
-      :items="colors">
+      :items="colors"
+      moveTo="/Check">
     </slider>
     <slider
       title="신규 클래스"
       cardWidth="325"
       cardHeight="300"
-      :items="slides">
+      :items="slides"
+      moveTo="/About">
     </slider>
   </div>
 </template>
@@ -68,6 +71,9 @@ export default {
         'Fifth',
       ],
     }
+  },
+  mounted() {
+    console.log(this.$route);
   },
 }
 </script>

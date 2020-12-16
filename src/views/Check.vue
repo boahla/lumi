@@ -1,9 +1,11 @@
 <template>
     <v-container>
+      <div style="width: 100%; height: 200px; background-color: lightblue;">
+      </div>
       <v-tabs
-        style="
-          position: fixed;
-          z-index: 1;">
+        class="checkTab"
+        style="z-index: 1;"
+        :class="{'check_Tab' : scrollTab, 'check_Fix' : scrollFix}">
         <v-tab
           @click="move('One')">
           Item One
@@ -224,6 +226,8 @@
     name: 'Check',
     data() {
       return {
+        scrollTab: true,
+        scrollFix: false,
         curriculum: [
           {
             title: 'lesson 1: basic',
@@ -275,11 +279,28 @@
     },
     methods: {
       move(num) {
+        console.log('num', num);
         var location = document.querySelector('.row' + num).offsetTop;
         window.scrollTo({top:location, behavior:'smooth'});
       },
+      scroll() {
+        const checkTab = document.querySelector('.checkTab').offsetTop;
+        const scrollTop = window.scrollY;
+        if (checkTab <= scrollTop) {
+          this.scrollFix = true;
+          this.scrollTab = false;
+        } else {
+          this.scrollFix = false;
+          this.scrollTab = true;
+        }
+      },
     },
     mounted() {
+      window.addEventListener('scroll', this.scroll);
+      console.log(this.$route);
+    },
+    beforeDestroy() {
+      window.removeEventListener('scroll', this.scroll);
     },
   }
 </script>
@@ -291,6 +312,18 @@
 }
 .v-tabs-bar {
   height: 70px;
+}
+.checkTab {
+}
+.check_Tab {
+  border-top: solid 1px lightgray;
+  border-bottom: solid 1px lightgray;
+}
+.check_Fix {
+  position: fixed;
+  top: 90px;
+  width: 67.7%;
+  border-bottom: solid 1px lightgray;
 }
 .oneText {
   padding: 15px 0px;

@@ -65,11 +65,14 @@
         type: String,
         default: '445',
       },
+      moveTo: {
+        type: String,
+      }
     },
     methods: {
       chooseItem() {
-        console.log('chooseItem');
-        this.$router.push('/Check');
+        console.log('chooseItem', this.moveTo);
+        this.$router.push(this.moveTo);
       },
       hoverItem() {
       },
