@@ -1,10 +1,8 @@
 <template>
   <v-container class="headerCon">
     <v-app-bar
+      outlined
       class="appBar"
-      absolute
-      color="white"
-      scroll-target="#scrolling-techniques-7"
       height="90"
       style="position: fixed;"
     >
@@ -25,7 +23,7 @@
         <v-icon>mdi-magnify</v-icon>
       </v-btn> -->
       <v-btn
-        v-if="!login"
+        v-if="login"
         depressed
         large
         class="ma-2 white--text"
@@ -72,6 +70,11 @@
             <v-list-item link @click="$router.push('/SubtitleList')">
               <v-icon class="mr-2" color="#595959">mdi-message-text</v-icon>
               자막 분석
+            </v-list-item>
+            <v-divider></v-divider>
+            <v-list-item link>
+              <v-icon class="mr-2" color="#595959">mdi-logout</v-icon>
+              로그아웃
             </v-list-item>
         </v-list>
       </v-menu>
@@ -144,5 +147,7 @@
 }
 .appBar {
   padding: 0px 15%;
+  background-color: #ffffff !important;
+  box-shadow: none !important;
 }
 </style>

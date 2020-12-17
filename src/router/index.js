@@ -62,7 +62,7 @@ const routes = [
     },
   },
   {
-    path: '/video',
+    path: '/video/:title',
     name: 'Video',
     components: {
       header: Header,
