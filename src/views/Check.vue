@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container class="check">
       <div style="width: 100%; height: 200px; background-color: lightblue;">
       </div>
       <v-tabs
@@ -279,7 +279,6 @@
     },
     methods: {
       move(num) {
-        console.log('num', num);
         var location = document.querySelector('.row' + num).offsetTop;
         window.scrollTo({top:location, behavior:'smooth'});
       },
@@ -306,14 +305,12 @@
 </script>
 
 <style>
-.container {
+.check {
   max-width: 1430px !important;
   padding: 0px !important;
 }
 .v-tabs-bar {
   height: 70px;
-}
-.checkTab {
 }
 .check_Tab {
   border-top: solid 1px lightgray;
@@ -321,7 +318,7 @@
 }
 .check_Fix {
   position: fixed;
-  top: 90px;
+  top: 70px;
   width: 67.7%;
   border-bottom: solid 1px lightgray;
 }

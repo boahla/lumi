@@ -3,10 +3,10 @@
     <v-card
       outlined
       color="white">
-      <div style="width: 45%; margin: 0 auto;">
+      <div style="max-width: 550px; min-width: 450px; margin: 0 auto;">
         <v-row style="padding-top: 3%;">
           <v-col>
-            <h2>회원가입</h2>
+            <h3>회원가입</h3>
           </v-col>
         </v-row>
         <v-divider style="margin: 3% 0px;"></v-divider>
@@ -19,7 +19,8 @@
             <v-text-field
               v-model="user.name"
               outlined
-              required>
+              required
+              dense>
             </v-text-field>
           </v-col>
         </v-row>
@@ -34,15 +35,18 @@
                 v-model="user.email"
                 style="width: 20%"
                 outlined
-                required>
+                required
+                dense>
               </v-text-field>
               <p style="padding:1%; font-size: 20px;">@</p>
               <v-select
+                v-model="user.emailadd"
                 label="이메일을 선택하세요."
                 filled
                 :items="emails"
                 style="width: 30%;"
-                single-line>
+                single-line
+                dense>
               </v-select>
             </v-row>
           </v-col>
@@ -61,6 +65,7 @@
               offset-y
               max-width="290px"
               min-width="290px"
+              dense
             >
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
@@ -85,8 +90,7 @@
             </v-input>
             <v-radio-group
               v-model="user.gender"
-              row
-              mandatory>
+              row>
               <v-radio
                 label="남"
                 value="m"
@@ -125,7 +129,9 @@
               v-model="user.pass"
               outlined
               required
-              type="password">
+              type="password"
+              dense
+              :rules="[rules.empty, rules.jo]">
             </v-text-field>
           </v-col>
         </v-row>
@@ -139,7 +145,9 @@
               v-model="user.passCheck"
               outlined
               required
-              type="password">
+              type="password"
+              dense
+              :rules="[passCheck => passCheck === user.pass || '비밀번호가 일치하지 않습니다.']">
             </v-text-field>
           </v-col>
         </v-row>
@@ -150,21 +158,12 @@
               height="5vh"
               color="#9ba094"
               depressed
-              class="white--text">
+              class="white--text"
+              @click="signupBtn">
               확인
             </v-btn>
           </v-col>
         </v-row>
-        <!-- <v-row style="background-color: pink;">
-          <v-col>
-            {{user.interest}}
-          </v-col>
-        </v-row>
-        <v-row style="background-color: skyblue;">
-          <v-col>
-            {{user.gender}}
-          </v-col>
-        </v-row> -->
       </div>
     </v-card>
   </v-container>
@@ -178,18 +177,20 @@ export default {
       user: {
         name: '',
         email: '',
+        emailadd: '',
         birth: new Date().toISOString().substr(0, 10),
         gender: null,
         interest: [],
-        password: '',
-        passwordCheck: '',
+        pass: '',
+        passCheck: '',
       },
+      birthFlag: false,
       emails: [
         'naver.com',
         'gmail.com',
       ],
       interests: [
-        {
+        { 
           name: '1',
         },
         {
@@ -198,11 +199,25 @@ export default {
         {
           name: '3',
         },
+        {
+          name: '4',
+        },
       ],
       rules: {
         empty: value => !!value || '비밀번호를 입력하세요.',
+        jo: value => /(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/.test(value) || '영문, 숫자, 기호의 조합으로 8자 이상 만들어져야합니다.',
       },
     }
+  },
+  methods: {
+    signupBtn() {
+      console.log('signupBtn', this.user);
+      let arr = new Array();
+      this.user.forEach(element => {
+        let data = new Object();
+        data.
+      });
+    },
   },
 }
 </script>

@@ -5,7 +5,7 @@
       <v-col
         cols="12">
         <div>
-          <h2>{{ title }}</h2>
+          <h3>{{ title }}</h3>
         </div>
         <v-sheet
           class="mx-auto"
@@ -82,7 +82,7 @@
 
 <style>
 .slider {
-  max-width: 100% !important;
+  max-width: 1300px !important;
   width: 100% !important;
   padding: 30px 12px !important;
 }

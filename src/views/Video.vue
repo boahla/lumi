@@ -4,7 +4,7 @@
       outlined
       color="white"
       >
-      <v-row>
+      <v-row style="padding: 2% 0px !important;">
         <v-col
           cols="8"
           style="height: 100%;">
@@ -14,7 +14,7 @@
           cols="4">
           <v-input
             hide-details="">
-            <h2 style="color: gray;">추천 동영상</h2>
+            <h3>추천 동영상</h3>
           </v-input>
           <v-divider></v-divider>
           <v-list class="videoList">
@@ -96,7 +96,7 @@
 
 <style>
 .videoCont {
-  max-width: 80% !important;
+  max-width: 88% !important;
 }
 iframe {
   width: 100%;

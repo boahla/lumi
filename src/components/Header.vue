@@ -3,7 +3,7 @@
     <v-app-bar
       outlined
       class="appBar"
-      height="90"
+      height="70"
       style="position: fixed;"
     >
       <v-toolbar-title>
@@ -23,7 +23,7 @@
         <v-icon>mdi-magnify</v-icon>
       </v-btn> -->
       <v-btn
-        v-if="login"
+        v-if="!login"
         depressed
         large
         class="ma-2 white--text"
@@ -49,7 +49,7 @@
       >
         <template v-slot:activator="{ on, attrs }">
           <v-avatar
-            v-if="login"
+            v-show="login"
             v-bind="attrs"
             v-on="on">
             <img
@@ -72,7 +72,7 @@
               자막 분석
             </v-list-item>
             <v-divider></v-divider>
-            <v-list-item link>
+            <v-list-item link @click="logout">
               <v-icon class="mr-2" color="#595959">mdi-logout</v-icon>
               로그아웃
             </v-list-item>
@@ -81,7 +81,7 @@
     </v-app-bar>
     <v-dialog
       v-model="loginFlag"
-      width="30%">
+      width="25%">
       <v-card>
         <v-card-title style="width: 100%; text-align: right;">
           <v-spacer></v-spacer>
@@ -107,7 +107,8 @@
             class="white--text"
             color="black"
             x-large
-            width="100%">
+            width="100%"
+            @click="loginBtn">
             로그인
           </v-btn>
         </v-card-text>
@@ -124,7 +125,7 @@
       return {
         loginFlag: false,
         signupFlag: true,
-        login: true,
+        login: false,
         show: false,
         loginUser: {
           id: '',
@@ -137,13 +138,23 @@
         },
       }
     },
+    methods: {
+      loginBtn() {
+        this.loginFlag = false;
+        this.login = true;
+      },
+      logout() {
+        this.login = false;
+      },
+    },
   }
 </script>
 
 <style>
 .headerCon {
-  height: 90px;
+  height: 70px;
   z-index: 2;
+  padding: 0px !important;
 }
 .appBar {
   padding: 0px 15%;

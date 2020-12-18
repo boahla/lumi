@@ -18,22 +18,22 @@
     </v-row>
     <slider
       title="추천 클래스"
-      cardWidth="325"
-      cardHeight="300"
+      cardWidth="270"
+      cardHeight="220"
       :items="slides"
       moveTo="/Video">
     </slider>
     <slider
       title="파트너 소개"
-      cardWidth="440"
-      cardHeight="300"
+      cardWidth="340  "
+      cardHeight="230"
       :items="colors"
       moveTo="/Check">
     </slider>
     <slider
       title="신규 클래스"
-      cardWidth="325"
-      cardHeight="300"
+      cardWidth="270"
+      cardHeight="220"
       :items="slides"
       moveTo="/About">
     </slider>

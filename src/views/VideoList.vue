@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="vidList">
     <v-card outlined color="white">
       <v-snackbar
         v-model="videoWarning"
@@ -22,12 +22,12 @@
       <v-row
         style="border-bottom: solid 1px rgba(0, 0, 0, 0.12);">
         <v-col>
-          <h2>동영상 분석</h2>
+          <h3>동영상 분석</h3>
         </v-col>
       </v-row>
       <v-row
         style="
-          height: 400px;
+          height: 290px;
           display:flex;
           align-items:center;">
         <div style="width: 60%; margin: 0 auto;">
@@ -40,7 +40,7 @@
               ></v-file-input>
             </v-col>
             <v-col cols="2">
-              <v-btn style="height: 70%;" width="100%" @click="videoSubmit"> 확인 </v-btn>
+              <v-btn style="height:60%;" width="100%" @click="videoSubmit"> 확인 </v-btn>
             </v-col>
           </v-row>
         </div>
@@ -49,7 +49,7 @@
         <v-progress-circular
           :size="70"
           :width="7"
-          color="gray"
+          color="blue-grey"
           indeterminate
           style="margin: 0 auto;"
         ></v-progress-circular>
@@ -58,15 +58,15 @@
         <v-col
           v-for="(item, i) in items"
           :key="i"
-          style="width: 350px"
+          style="width: 300px"
         >
           <v-card
-            style="max-width: 400px; min-width: 350px;"
+            style="max-width: 350px; min-width: 300px;"
             @click="$router.push(`/Video/${item.writer}`)">
             <v-img
               class="white--text align-end"
               style="width: auto; background-color: gray;"
-              height="200px"
+              height="160px"
               :src="item.img"
             >
               <v-card-title></v-card-title>
@@ -232,5 +232,8 @@ export default {
 <style>
 .row {
   margin: 0px !important;
+}
+.vidList {
+  max-width: 1300px !important;
 }
 </style>
