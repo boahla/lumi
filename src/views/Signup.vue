@@ -212,11 +212,11 @@ export default {
   methods: {
     signupBtn() {
       console.log('signupBtn', this.user);
-      let arr = new Array();
-      this.user.forEach(element => {
-        let data = new Object();
-        data.
-      });
+      // let arr = new Array();
+      // this.user.forEach(element => {
+      //   let data = new Object();
+      //   data.
+      // });
     },
   },
 }
