@@ -52,10 +52,7 @@
             v-show="login"
             v-bind="attrs"
             v-on="on">
-            <img
-              src="https://cdn.vuetifyjs.com/images/john.jpg"
-              alt="John"
-            >
+            <v-icon large>mdi-account </v-icon>
           </v-avatar>
         </template>
         <v-divider color="#eee"></v-divider>
@@ -67,10 +64,10 @@
               <v-icon class="mr-2" color="#595959">mdi-arrow-up-bold-box-outline</v-icon>
               동영상 분석
             </v-list-item>
-            <v-list-item link @click="$router.push('/SubtitleList')">
+            <!-- <v-list-item link @click="$router.push('/SubtitleList')">
               <v-icon class="mr-2" color="#595959">mdi-message-text</v-icon>
               자막 분석
-            </v-list-item>
+            </v-list-item> -->
             <v-divider></v-divider>
             <v-list-item link @click="logout">
               <v-icon class="mr-2" color="#595959">mdi-logout</v-icon>

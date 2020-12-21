@@ -20,7 +20,8 @@
               v-model="user.name"
               outlined
               required
-              dense>
+              dense
+              :rules="[rules.nameempty]">
             </v-text-field>
           </v-col>
         </v-row>
@@ -33,12 +34,12 @@
             <v-row>
               <v-text-field
                 v-model="user.email"
-                style="width: 20%"
                 outlined
                 required
-                dense>
+                dense
+                :rules="[rules.emailempty]">
               </v-text-field>
-              <p style="padding:1%; font-size: 20px;">@</p>
+              <!-- <p style="padding:1%; font-size: 20px;">@</p>
               <v-select
                 v-model="user.emailadd"
                 label="이메일을 선택하세요."
@@ -47,7 +48,7 @@
                 style="width: 30%;"
                 single-line
                 dense>
-              </v-select>
+              </v-select> -->
             </v-row>
           </v-col>
         </v-row>
@@ -104,19 +105,30 @@
         </v-row>
         <v-row>
           <v-col>
-              <v-input
+            <v-input
               hide-details>
               관심 분야
             </v-input>
-            <v-checkbox
+            <v-radio-group
+              v-model="user.interest"
+              row>
+              <v-radio
+                v-for="(item, i) in interests"
+                :key="i"
+                :label="item.label"
+                :value="item.value"
+                >
+              </v-radio>
+            </v-radio-group>
+            <!-- <v-checkbox
               v-for="(item, i) in interests"
               :key="i"
               v-model="user.interest"
-              :label="item.name"
+              :label="item.label"
               hide-details
               style="width: fit-content; display: inline-block;"
               :value="item.name">
-            </v-checkbox>
+            </v-checkbox> -->
           </v-col>
         </v-row>
         <v-row>
@@ -131,7 +143,7 @@
               required
               type="password"
               dense
-              :rules="[rules.empty, rules.jo]">
+              :rules="[rules.passempty, rules.jo]">
             </v-text-field>
           </v-col>
         </v-row>
@@ -178,9 +190,9 @@ export default {
         name: '',
         email: '',
         emailadd: '',
-        birth: new Date().toISOString().substr(0, 10),
-        gender: null,
-        interest: [],
+        birth: '',
+        gender: '',
+        interest: '',
         pass: '',
         passCheck: '',
       },
@@ -191,20 +203,26 @@ export default {
       ],
       interests: [
         { 
-          name: '1',
+          label: '1',
+          value: 'a',
         },
         {
-          name: '2',
+          label: '2',
+          value: 'b',
         },
         {
-          name: '3',
+          label: '3',
+          value: 'c',
         },
         {
-          name: '4',
-        },
+          label: '4',
+          value: 'd',
+        }
       ],
       rules: {
-        empty: value => !!value || '비밀번호를 입력하세요.',
+        passempty: value => !!value || '비밀번호를 입력하세요.',
+        nameempty: value => !!value || '이름을 입력하세요.',
+        emailempty: value => !!value || '이메일을 입력하세요.',
         jo: value => /(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/.test(value) || '영문, 숫자, 기호의 조합으로 8자 이상 만들어져야합니다.',
       },
     }
@@ -212,6 +230,7 @@ export default {
   methods: {
     signupBtn() {
       console.log('signupBtn', this.user);
+      this.$router.push('/');
       // let arr = new Array();
       // this.user.forEach(element => {
       //   let data = new Object();

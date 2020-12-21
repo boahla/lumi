@@ -1,5 +1,23 @@
 <template>
   <v-container class="videoCont">
+    <v-dialog
+      class="videoLoading"
+      v-model="videoloading"
+      persistent
+      width="300"
+    >
+      <v-card class="lodaingCard">
+        <v-progress-circular
+          :size="90"
+          :width="10"
+          color="white"
+          indeterminate
+        ></v-progress-circular>
+      </v-card>
+    </v-dialog>
+    <v-card>
+
+    </v-card>
     <v-card
       outlined
       color="white"
@@ -9,6 +27,7 @@
           cols="8"
           style="height: 100%;">
           <iframe src="https://www.youtube.com/embed/3iM_06QeZi8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <!-- <video src="https://www.youtube.com/embed/3iM_06QeZi8"></video> -->
         </v-col>
         <v-col
           cols="4">
@@ -51,6 +70,9 @@
     name: 'Video',
     data() {
       return {
+        videoloading: true,
+        timer: null,
+        times: 0,
         items : [
           {
             img: require('../assets/main2.jpg'),
@@ -91,6 +113,21 @@
         ],
       }
     },
+    methods: {
+      interval() {
+      this.timer = setInterval(() => {
+        this.times += 1;
+        if (this.times >= 2) {
+          // 로딩 프로그래스 종료
+          this.videoloading = false;
+          clearInterval(this.timer);
+        }
+      }, 1000);
+    },
+    },
+    mounted() {
+      this.interval();
+    },
   }
 </script>
 
@@ -98,11 +135,26 @@
 .videoCont {
   max-width: 88% !important;
 }
+.v-dialog {
+  box-shadow: unset !important;
+}
+.videoCont >>> .v-dialog {
+  box-shadow: unset !important;
+}
+.lodaingCard {
+  background-color: unset !important;
+  overflow: hidden;
+  text-align: center;;
+}
 iframe {
   width: 100%;
   height: 66vh;
 }
-.v-list-item__content {
+iframe {
+  width: 100%;
+  height: 66vh;
+}
+.videoCont .v-list-item__content {
   align-items: start !important;
   align-self: start !important;
   padding: 5% 0px !important;

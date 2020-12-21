@@ -44,6 +44,9 @@
                 style="height: 60%;"
                 width="100%"
                 @click="subtitleSubmit"
+                depressed
+                class="ma-2 white--text"
+                color="#BDBDBD"
                 > 확인
               </v-btn>
             </v-col>

@@ -33,19 +33,29 @@
         <div style="width: 60%; margin: 0 auto;">
           <v-row>
             <v-col cols="10">
-              <v-file-input
+              <!-- <v-file-input
                 v-model="videoFile"
                 show-size
                 truncate-length="15"
-              ></v-file-input>
+              ></v-file-input> -->
+              <v-select
+                v-model="videoFile"
+                :items="videoItems">
+              </v-select>
             </v-col>
             <v-col cols="2">
-              <v-btn style="height:60%;" width="100%" @click="videoSubmit"> 확인 </v-btn>
+              <v-btn
+                style="height:60%;"
+                width="100%"
+                @click="videoSubmit"
+                depressed
+                class="ma-2 white--text"
+                color="#BDBDBD"> 확인 </v-btn>
             </v-col>
           </v-row>
         </div>
       </v-row>
-      <v-row class="text-center" v-if="videoloading">
+      <!-- <v-row class="text-center" v-if="videoloading">
         <v-progress-circular
           :size="70"
           :width="7"
@@ -79,7 +89,7 @@
             </v-card-text>
           </v-card>
         </v-col>
-      </v-row>
+      </v-row> -->
     </v-card>
   </v-container>
 </template>
@@ -89,29 +99,18 @@ export default {
   name: 'VideoList',
   data() {
     return {
-      videoComplete: false,
-      videoloading: false,
-      videoFile: undefined,
+      videoItems: [
+        '제목1',
+        '제목2',
+        '제목3',
+        '제목4',
+        '제목5',
+        '제목6',
+      ],
+      videoFile: null,
       videoWarning: false,
       videotimeout: 2000,
       errortext: '파일을 선택하세요.',
-      slides: [
-        require('../assets/main1.jpg'),
-        require('../assets/main2.jpg'),
-        require('../assets/main3.jpg'),
-        require('../assets/main4.jpg'),
-        require('../assets/main5.jpg'),
-        require('../assets/main1.jpg'),
-        require('../assets/main2.jpg'),
-        require('../assets/main3.jpg'),
-        require('../assets/main4.jpg'),
-        require('../assets/main5.jpg'),
-        require('../assets/main1.jpg'),
-        require('../assets/main2.jpg'),
-        require('../assets/main3.jpg'),
-        require('../assets/main4.jpg'),
-        require('../assets/main5.jpg'),
-      ],
       items: [
         {
           img: require('../assets/main1.jpg'),
@@ -206,13 +205,9 @@ export default {
     videoSubmit() {
       console.log('subtitlesUBTIT', this.videoFile);
       if (this.videoFile) {
-        this.videoloading = true;
-        this.videoComplete = false;
-        this.interval();
+        this.$router.push(`/Video/${this.videoFile}`);
       } else {
         this.videoWarning = true;
-        this.videoComplete = false;
-        this.videoloading = false;
       }
     },
     interval() {
@@ -220,8 +215,6 @@ export default {
         this.times += 1;
         if (this.times >= 3) {
           clearInterval(this.timer);
-          this.videoloading = false;
-          this.videoComplete = true;
         }
       }, 1000);
     },

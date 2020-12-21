@@ -25,12 +25,12 @@
                 class="ma-4"
                 :height="cardHeight"
                 :width="cardWidth"
-                @click="chooseItem"
+                @click="chooseItem(item)"
                 @mouseover="hoverItem"
               >
-                <v-img :src="item" width="100%" height="60%"></v-img>
-                <v-card-title>{{item}}</v-card-title>
-                <v-card-subtitle>{{item}}</v-card-subtitle>
+                <v-img :src="item.img" width="100%" height="60%"></v-img>
+                <v-card-title>{{item.title}}</v-card-title>
+                <v-card-subtitle>{{item.writer}}</v-card-subtitle>
               </v-card>
             </v-slide-item>
           </v-slide-group>
@@ -70,9 +70,13 @@
       }
     },
     methods: {
-      chooseItem() {
+      chooseItem(item) {
         console.log('chooseItem', this.moveTo);
-        this.$router.push(this.moveTo);
+        if (this.moveTo === '/Video') {
+          this.$router.push(`${this.moveTo}/${item.writer}`);
+        } else {
+          this.$router.push(this.moveTo);
+        }
       },
       hoverItem() {
       },

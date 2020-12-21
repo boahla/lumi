@@ -17,24 +17,24 @@
       </v-carousel>
     </v-row>
     <slider
-      title="추천 클래스"
+      title="자막 분석"
       cardWidth="270"
       cardHeight="220"
-      :items="slides"
+      :items="items" 
       moveTo="/Video">
     </slider>
     <slider
       title="파트너 소개"
       cardWidth="340  "
       cardHeight="230"
-      :items="colors"
+      :items="items"
       moveTo="/Check">
     </slider>
     <slider
       title="신규 클래스"
       cardWidth="270"
       cardHeight="220"
-      :items="slides"
+      :items="items"
       moveTo="/About">
     </slider>
   </div>
@@ -56,19 +56,88 @@ export default {
         require('../assets/main4.jpg'),
         require('../assets/main5.jpg'),
       ],
+      items: [
+        {
+          img: require('../assets/main1.jpg'),
+          title: 'title',
+          writer: 'lumi1',
+          body: '설명합니다.',
+        },
+        {
+          img: require('../assets/main3.jpg'),
+          title: 'title',
+          writer: 'lumi2',
+          body: '설명합니다.',
+        },
+        {
+          img: require('../assets/main2.jpg'),
+          title: 'title',
+          writer: 'lumi3',
+          body: '설명합니다.',
+        },
+        {
+          img: require('../assets/main2.jpg'),
+          title: 'title',
+          writer: 'lumi4',
+          body: '설명합니다.',
+        },
+        {
+          img: require('../assets/main3.jpg'),
+          title: 'title',
+          writer: 'lumi5',
+          body: '설명합니다.',
+        },
+        {
+          img: require('../assets/main4.jpg'),
+          title: 'title',
+          writer: 'lumi6',
+          body: '설명합니다.',
+        },
+        {
+          img: require('../assets/main5.jpg'),
+          title: 'title',
+          writer: 'lumi7',
+          body: '설명합니다.',
+        },
+        {
+          img: require('../assets/main5.jpg'),
+          title: 'title8',
+          writer: 'lumi',
+          body: '설명합니다.',
+        },
+        {
+          img: require('../assets/main1.jpg'),
+          title: 'title',
+          writer: 'lumi9',
+          body: '설명합니다.',
+        },
+        {
+          img: require('../assets/main2.jpg'),
+          title: 'title',
+          writer: 'lumi10',
+          body: '설명합니다.',
+        },
+        {
+          img: require('../assets/main5.jpg'),
+          title: 'title',
+          writer: 'lumi7',
+          body: '설명합니다.',
+          time: '00:00:27.00'
+        },
+        {
+          img: require('../assets/main5.jpg'),
+          title: 'title8',
+          writer: 'lumi',
+          body: '설명합니다.',
+          time: '00:00:27.00'
+        },
+      ],
       colors: [
         'indigo',
         'warning',
         'pink darken-2',
         'red lighten-1',
         'deep-purple accent-4',
-      ],
-      slidess: [
-        'First',
-        'Second',
-        'Third',
-        'Fourth',
-        'Fifth',
       ],
     }
   },
