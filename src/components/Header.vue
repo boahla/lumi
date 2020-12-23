@@ -93,7 +93,7 @@
             outlined>
           </v-text-field>
           <v-text-field
-            v-model="loginUser.pass"
+            v-model="loginUser.password"
             prepend-inner-icon="mdi-account-lock"
             :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
             :type="show ? 'text' : 'password'"
@@ -126,12 +126,11 @@
         show: false,
         loginUser: {
           id: '',
-          pass: '',
+          password: '',
         },
         user: {
           name: '루미',
           email: 'lumi@didicast.com',
-          img: '',
         },
       }
     },
@@ -139,11 +138,18 @@
       loginBtn() {
         this.loginFlag = false;
         this.login = true;
+        console.log('user:', this.loginUser);
       },
       logout() {
         this.login = false;
       },
+      // userInfo() {
+      //   console.log('user ');
+      // },
     },
+    // watch: {
+    //   'user': 'userInfo',
+    // },
   }
 </script>
 

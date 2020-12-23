@@ -26,8 +26,8 @@
         <v-col
           cols="8"
           style="height: 100%;">
-          <iframe src="https://www.youtube.com/embed/3iM_06QeZi8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          <!-- <video src="https://www.youtube.com/embed/3iM_06QeZi8"></video> -->
+          <!-- <iframe src="https://www.youtube.com/embed/3iM_06QeZi8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+          <video width="100%" controls="controls" src="https://tv.naver.com/v/17429626" autoplay></video>
         </v-col>
         <v-col
           cols="4">
@@ -66,55 +66,56 @@
 </template>
 
 <script>
-  export default {
-    name: 'Video',
-    data() {
-      return {
-        videoloading: true,
-        timer: null,
-        times: 0,
-        items : [
-          {
-            img: require('../assets/main2.jpg'),
-            title: 'title1',
-            writer: 'lumi1',
-            body: '설명합니다.',
-          },
-          {
-            img: require('../assets/main3.jpg'),
-            title: 'title3',
-            writer: 'lumi2',
-            body: '설명합니다.',
-          },
-          {
-            img: require('../assets/main5.jpg'),
-            title: 'title2',
-            writer: 'lumi3',
-            body: '설명합니다.',
-          },
-          {
-            img: require('../assets/main2.jpg'),
-            title: 'title1',
-            writer: 'lumi1',
-            body: '설명합니다.',
-          },
-          {
-            img: require('../assets/main3.jpg'),
-            title: 'title3',
-            writer: 'lumi2',
-            body: '설명합니다.',
-          },
-          {
-            img: require('../assets/main5.jpg'),
-            title: 'title2',
-            writer: 'lumi3',
-            body: '설명합니다.',
-          },
-        ],
-      }
-    },
-    methods: {
-      interval() {
+import axios from 'axios';
+export default {
+  name: 'Video',
+  data() {
+    return {
+      videoloading: true,
+      timer: null,
+      times: 0,
+      items : [
+        {
+          img: require('../assets/main2.jpg'),
+          title: 'title1',
+          writer: 'lumi1',
+          body: '설명합니다.',
+        },
+        {
+          img: require('../assets/main3.jpg'),
+          title: 'title3',
+          writer: 'lumi2',
+          body: '설명합니다.',
+        },
+        {
+          img: require('../assets/main5.jpg'),
+          title: 'title2',
+          writer: 'lumi3',
+          body: '설명합니다.',
+        },
+        {
+          img: require('../assets/main2.jpg'),
+          title: 'title1',
+          writer: 'lumi1',
+          body: '설명합니다.',
+        },
+        {
+          img: require('../assets/main3.jpg'),
+          title: 'title3',
+          writer: 'lumi2',
+          body: '설명합니다.',
+        },
+        {
+          img: require('../assets/main5.jpg'),
+          title: 'title2',
+          writer: 'lumi3',
+          body: '설명합니다.',
+        },
+      ],
+    }
+  },
+  methods: {
+    interval() {
       this.timer = setInterval(() => {
         this.times += 1;
         if (this.times >= 2) {
@@ -124,11 +125,24 @@
         }
       }, 1000);
     },
+    connect(path, data) {
+      axios.get(path, data)
+        .then(res => {
+          console.log('res: ', res);
+        })
+        .catch(e => {
+          console.log('error: ', e);
+        });
     },
-    mounted() {
-      this.interval();
-    },
-  }
+  },
+  created() {
+    // const formData = '';
+    // this.connect
+  },
+  mounted() {
+    this.interval();
+  },
+}
 </script>
 
 <style>

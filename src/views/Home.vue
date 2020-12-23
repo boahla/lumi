@@ -42,6 +42,7 @@
 
 <script>
 import slider from '@/components/slider';
+import axios from 'axios';
 export default {
   name: 'Home',
   components: {
@@ -141,8 +142,22 @@ export default {
       ],
     }
   },
+  methods: {
+    connect(path, data) {
+      axios.get(path, data)
+        .then(res => {
+          console.log('res: ', res);
+        })
+        .catch(e => {
+          console.log('error: ', e);
+        });
+    },
+  },
+  created() {
+    // const formData = '';
+    // this.connect
+  },
   mounted() {
-    console.log(this.$route);
   },
 }
 </script>

@@ -115,8 +115,9 @@
               <v-radio
                 v-for="(item, i) in interests"
                 :key="i"
-                :label="item.label"
-                :value="item.value"
+                :label="item"
+                :value="item"
+                style="width : 115px; height: 32px;"
                 >
               </v-radio>
             </v-radio-group>
@@ -202,22 +203,11 @@ export default {
         'gmail.com',
       ],
       interests: [
-        { 
-          label: '1',
-          value: 'a',
-        },
-        {
-          label: '2',
-          value: 'b',
-        },
-        {
-          label: '3',
-          value: 'c',
-        },
-        {
-          label: '4',
-          value: 'd',
-        }
+        '문학','수학', '영어', '생물',
+        '화학', '물리', '지구과학', '음악',
+        '미술', '체육', '한국사', '법과 정치',
+        '경제', '생활윤리', '한국지리', '세계지리',
+        '세계사', '동아시아사', 'IT', '제2외국어',
       ],
       rules: {
         passempty: value => !!value || '비밀번호를 입력하세요.',
@@ -231,11 +221,6 @@ export default {
     signupBtn() {
       console.log('signupBtn', this.user);
       this.$router.push('/');
-      // let arr = new Array();
-      // this.user.forEach(element => {
-      //   let data = new Object();
-      //   data.
-      // });
     },
   },
 }
