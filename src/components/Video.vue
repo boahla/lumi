@@ -66,9 +66,10 @@
 </template>
 
 <script>
-import axios from 'axios';
+import API from '@/mixin/api';
 export default {
   name: 'Video',
+  mixins: [API],
   data() {
     return {
       videoloading: true,
@@ -125,19 +126,10 @@ export default {
         }
       }, 1000);
     },
-    connect(path, data) {
-      axios.get(path, data)
-        .then(res => {
-          console.log('res: ', res);
-        })
-        .catch(e => {
-          console.log('error: ', e);
-        });
-    },
   },
   created() {
-    // const formData = '';
-    // this.connect
+    this.insert('ingvideo');
+    // user id
   },
   mounted() {
     this.interval();

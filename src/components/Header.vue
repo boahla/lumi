@@ -64,10 +64,6 @@
               <v-icon class="mr-2" color="#595959">mdi-arrow-up-bold-box-outline</v-icon>
               동영상 분석
             </v-list-item>
-            <!-- <v-list-item link @click="$router.push('/SubtitleList')">
-              <v-icon class="mr-2" color="#595959">mdi-message-text</v-icon>
-              자막 분석
-            </v-list-item> -->
             <v-divider></v-divider>
             <v-list-item link @click="logout">
               <v-icon class="mr-2" color="#595959">mdi-logout</v-icon>
@@ -116,41 +112,37 @@
 </template>
 
 <script>
-  export default {
-    name: 'Header',
-    data() {
-      return {
-        loginFlag: false,
-        signupFlag: true,
-        login: false,
-        show: false,
-        loginUser: {
-          id: '',
-          password: '',
-        },
-        user: {
-          name: '루미',
-          email: 'lumi@didicast.com',
-        },
-      }
-    },
-    methods: {
-      loginBtn() {
-        this.loginFlag = false;
-        this.login = true;
-        console.log('user:', this.loginUser);
+import API from '@/mixin/api';
+export default {
+  name: 'Header',
+  mixins: [API],
+  data() {
+    return {
+      loginFlag: false,
+      signupFlag: true,
+      login: false,
+      show: false,
+      loginUser: {
+        id: '',
+        password: '',
       },
-      logout() {
-        this.login = false;
+      user: {
+        name: '루미',
+        email: 'lumi@didicast.com',
       },
-      // userInfo() {
-      //   console.log('user ');
-      // },
+    }
+  },
+  methods: {
+    loginBtn() {
+      this.loginFlag = false;
+      this.login = true;
+      this.insert(`login?id=${this.loginUser.id}&pass=${this.loginUser.password}`, this.loginUser);
     },
-    // watch: {
-    //   'user': 'userInfo',
-    // },
-  }
+    logout() {
+      this.login = false;
+    },
+  },
+}
 </script>
 
 <style>

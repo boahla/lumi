@@ -12,7 +12,6 @@
           :key="i"
         >
           <img :src="item" width="100%" height="100%">
-          <!-- <img src="../assets/logo.png"> -->
         </v-carousel-item>
       </v-carousel>
     </v-row>
@@ -30,21 +29,15 @@
       :items="items"
       moveTo="/Check">
     </slider>
-    <slider
-      title="신규 클래스"
-      cardWidth="270"
-      cardHeight="220"
-      :items="items"
-      moveTo="/About">
-    </slider>
   </div>
 </template>
 
 <script>
 import slider from '@/components/slider';
-import axios from 'axios';
+import API from '@/mixin/api';
 export default {
   name: 'Home',
+  mixins: [API],
   components: {
     slider,
   },
@@ -143,21 +136,10 @@ export default {
     }
   },
   methods: {
-    connect(path, data) {
-      axios.get(path, data)
-        .then(res => {
-          console.log('res: ', res);
-        })
-        .catch(e => {
-          console.log('error: ', e);
-        });
-    },
   },
   created() {
-    // const formData = '';
-    // this.connect
-  },
-  mounted() {
+    // this.insert('Reco');
+    // user id
   },
 }
 </script>

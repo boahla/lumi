@@ -71,7 +71,6 @@
     },
     methods: {
       chooseItem(item) {
-        console.log('chooseItem', this.moveTo);
         if (this.moveTo === '/Video') {
           this.$router.push(`${this.moveTo}/${item.writer}`);
         } else {

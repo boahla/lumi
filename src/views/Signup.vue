@@ -10,7 +10,7 @@
           </v-col>
         </v-row>
         <v-divider style="margin: 3% 0px;"></v-divider>
-        <v-row>
+        <!-- <v-row>
           <v-col>
             <v-input
               hide-details>
@@ -24,7 +24,7 @@
               :rules="[rules.nameempty]">
             </v-text-field>
           </v-col>
-        </v-row>
+        </v-row> -->
         <v-row>
           <v-col>
             <v-input
@@ -33,22 +33,12 @@
             </v-input>
             <v-row>
               <v-text-field
-                v-model="user.email"
+                v-model="user.id"
                 outlined
                 required
                 dense
                 :rules="[rules.emailempty]">
               </v-text-field>
-              <!-- <p style="padding:1%; font-size: 20px;">@</p>
-              <v-select
-                v-model="user.emailadd"
-                label="이메일을 선택하세요."
-                filled
-                :items="emails"
-                style="width: 30%;"
-                single-line
-                dense>
-              </v-select> -->
             </v-row>
           </v-col>
         </v-row>
@@ -56,9 +46,17 @@
           <v-col cols="8">
               <v-input
               hide-details>
-              생년월일
+              나이
             </v-input>
-            <v-menu
+            <v-row>
+              <v-text-field
+                v-model="user.age"
+                outlined
+                required
+                dense>
+              </v-text-field>
+            </v-row>
+            <!-- <v-menu
               ref="birthFlag"
               v-model="birthFlag"
               :close-on-content-click="false"
@@ -82,23 +80,23 @@
                 no-title
                 @input="birthFlag = false"
               ></v-date-picker>
-            </v-menu>
+            </v-menu> -->
           </v-col>
           <v-col cols="4">
-              <v-input
+            <v-input
               hide-details>
               성별
             </v-input>
             <v-radio-group
-              v-model="user.gender"
+              v-model="user.gen"
               row>
               <v-radio
                 label="남"
-                value="m"
+                value="남"
               ></v-radio>
               <v-radio
                 label="여"
-                value="w"
+                value="여"
               ></v-radio>
             </v-radio-group>
           </v-col>
@@ -110,7 +108,7 @@
               관심 분야
             </v-input>
             <v-radio-group
-              v-model="user.interest"
+              v-model="user.inter"
               row>
               <v-radio
                 v-for="(item, i) in interests"
@@ -139,7 +137,7 @@
               비밀번호
             </v-input>
             <v-text-field
-              v-model="user.pass"
+              v-model="user.password"
               outlined
               required
               type="password"
@@ -155,12 +153,12 @@
               비밀번호 확인
             </v-input>
             <v-text-field
-              v-model="user.passCheck"
+              v-model="passCheck"
               outlined
               required
               type="password"
               dense
-              :rules="[passCheck => passCheck === user.pass || '비밀번호가 일치하지 않습니다.']">
+              :rules="[passCheck => passCheck === user.password || '비밀번호가 일치하지 않습니다.']">
             </v-text-field>
           </v-col>
         </v-row>
@@ -183,25 +181,21 @@
 </template>
 
 <script>
+import API from '@/mixin/api';
 export default {
   name: 'Signup',
+  mixins: [API],
   data() {
     return {
       user: {
-        name: '',
-        email: '',
-        emailadd: '',
-        birth: '',
-        gender: '',
-        interest: '',
-        pass: '',
-        passCheck: '',
+        id: '',
+        age: '',
+        gen: '',
+        inter: '',
+        password: '',
       },
+      passCheck: '',
       birthFlag: false,
-      emails: [
-        'naver.com',
-        'gmail.com',
-      ],
       interests: [
         '문학','수학', '영어', '생물',
         '화학', '물리', '지구과학', '음악',
@@ -219,8 +213,7 @@ export default {
   },
   methods: {
     signupBtn() {
-      console.log('signupBtn', this.user);
-      this.$router.push('/');
+      this.insert(`signin?id=${this.user.id}&age=${this.user.age}&gen=${this.user.gen}&inter=${this.user.inter}&password=${this.user.password}`, this.user);
     },
   },
 }

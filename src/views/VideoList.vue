@@ -95,8 +95,10 @@
 </template>
 
 <script>
+import API from '@/mixin/api';
 export default {
   name: 'VideoList',
+  mixins: [API],
   data() {
     return {
       videoItems: [
@@ -218,6 +220,9 @@ export default {
         }
       }, 1000);
     },
+  },
+  created() {
+    this.bring(1, 'videolist');
   },
 }
 </script>
