@@ -30,7 +30,7 @@
               >
                 <v-img :src="item.img" width="100%" height="60%"></v-img>
                 <v-card-title>{{item.title}}</v-card-title>
-                <v-card-subtitle>{{item.writer}}</v-card-subtitle>
+                <!-- <v-card-subtitle>{{item.writer}}</v-card-subtitle> -->
               </v-card>
             </v-slide-item>
           </v-slide-group>
@@ -72,7 +72,9 @@
     methods: {
       chooseItem(item) {
         if (this.moveTo === '/Video') {
-          this.$router.push(`${this.moveTo}/${item.writer}`);
+          console.log('tt', item.title);
+          this.$store.commit('list/VIDEO_SET', item)
+          this.$router.push(`${this.moveTo}/${item.title}`);
         } else {
           this.$router.push(this.moveTo);
         }

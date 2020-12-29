@@ -27,7 +27,8 @@
           cols="8"
           style="height: 100%;">
           <!-- <iframe src="https://www.youtube.com/embed/3iM_06QeZi8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-          <video width="100%" controls="controls" src="https://tv.naver.com/v/17429626" autoplay></video>
+          <video width="100%" controls="controls" :src="plyVideo.url" autoplay></video>
+          <h3>{{plyVideo.title}}</h3>
         </v-col>
         <v-col
           cols="4">
@@ -39,9 +40,9 @@
           <v-list class="videoList">
             <v-list-item-group>
               <v-list-item
-                v-for="(item, i) in items"
+                v-for="(item, i) in recLists"
                 :key="i"
-                @click="$router.push(`/Video/${item.writer}`)">
+                @click="$router.push(`/Video/${item.title}`)">
                 <v-list-item-avatar
                   tile
                   width="45%"
@@ -52,9 +53,9 @@
                 </v-list-item-avatar>
                 <v-list-item-content>
                   <h3>{{item.title}}</h3>
-                  <div style="padding: 3% 0%;">
+                  <!-- <div style="padding: 3% 0%;">
                     {{item.writer}}
-                  </div>
+                  </div> -->
                 </v-list-item-content>
               </v-list-item>
             </v-list-item-group>
@@ -66,16 +67,16 @@
 </template>
 
 <script>
-import API from '@/mixin/api';
 export default {
   name: 'Video',
-  mixins: [API],
   data() {
     return {
+      user: this.$store.state.user.user,
+      plyVideo: this.$store.state.list.video,
       videoloading: true,
       timer: null,
       times: 0,
-      items : [
+      recLists : [
         {
           img: require('../assets/main2.jpg'),
           title: 'title1',
@@ -126,10 +127,25 @@ export default {
         }
       }, 1000);
     },
+    getVideo() {
+      this.recLists = [];
+      this.$store.dispatch('api', {
+        url: `ingvideo?{&Video_name=${this.plyVideo.title}&}`,
+      })
+      const sub = this.$store.state.data.substring(3, this.$store.state.data.length - 2);
+      const sp = sub.split('\', \'');
+      sp.forEach(element => {
+        const sl = element.split(': ');
+        this.recLists.push({
+          title: sl[0],
+          url: sl[1],
+        })
+      });
+      console.log('subitems', this.recLists);
+    },
   },
   created() {
-    this.insert('ingvideo');
-    // user id
+    this.getVideo();
   },
   mounted() {
     this.interval();

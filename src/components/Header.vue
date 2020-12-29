@@ -23,7 +23,7 @@
         <v-icon>mdi-magnify</v-icon>
       </v-btn> -->
       <v-btn
-        v-if="!login"
+        v-if="!user.flag"
         depressed
         large
         class="ma-2 white--text"
@@ -32,12 +32,12 @@
         회원가입
       </v-btn>
       <v-btn
-        v-if="!login"
+        v-if="!user.flag"
         outlined
         large
         class="ma-2"
         color="#BDBDBD"
-        @click="loginFlag = true">
+        @click="loginDialog(true)">
         로그인
       </v-btn>
       <v-menu
@@ -49,7 +49,7 @@
       >
         <template v-slot:activator="{ on, attrs }">
           <v-avatar
-            v-show="login"
+            v-show="user.flag"
             v-bind="attrs"
             v-on="on">
             <v-icon large>mdi-account </v-icon>
@@ -57,8 +57,8 @@
         </template>
         <v-divider color="#eee"></v-divider>
         <v-list>
-            <v-list-item><h3>{{user.name}}</h3></v-list-item>
-            <v-list-item>{{user.email}}</v-list-item>
+            <v-list-item><h3>{{loginUser.id}}</h3></v-list-item>
+            <!-- <v-list-item>{{user.email}}</v-list-item> -->
             <v-divider></v-divider>
             <v-list-item link @click="$router.push('/VideoList')">
               <v-icon class="mr-2" color="#595959">mdi-arrow-up-bold-box-outline</v-icon>
@@ -73,12 +73,12 @@
       </v-menu>
     </v-app-bar>
     <v-dialog
-      v-model="loginFlag"
+      v-model="user.dialog"
       width="25%">
       <v-card>
         <v-card-title style="width: 100%; text-align: right;">
           <v-spacer></v-spacer>
-          <v-icon @click="loginFlag = false;">mdi-close</v-icon>
+          <v-icon @click="loginDialog(false)">mdi-close</v-icon>
         </v-card-title>
         <v-divider></v-divider>
         <v-card-text
@@ -112,34 +112,27 @@
 </template>
 
 <script>
-import API from '@/mixin/api';
 export default {
   name: 'Header',
-  mixins: [API],
   data() {
     return {
-      loginFlag: false,
-      signupFlag: true,
-      login: false,
+      user: this.$store.state.user.user,
       show: false,
       loginUser: {
         id: '',
         password: '',
       },
-      user: {
-        name: '루미',
-        email: 'lumi@didicast.com',
-      },
     }
   },
   methods: {
+    loginDialog(flag) {
+      this.$store.commit('user/LOGIN_DIALOG_SET', flag);
+    },
     loginBtn() {
-      this.loginFlag = false;
-      this.login = true;
-      this.insert(`login?id=${this.loginUser.id}&pass=${this.loginUser.password}`, this.loginUser);
+      this.$store.dispatch('user/login', this.loginUser);
     },
     logout() {
-      this.login = false;
+      this.$store.commit('user/LOGOUT');
     },
   },
 }

@@ -213,7 +213,15 @@ export default {
   },
   methods: {
     signupBtn() {
-      this.insert(`signin?id=${this.user.id}&age=${this.user.age}&gen=${this.user.gen}&inter=${this.user.inter}&password=${this.user.password}`, this.user);
+      this.$store.dispatch('api', {
+        url: `signin?{&id=${this.user.id}&age=${this.user.age}&gen=${this.user.gen}&inter=${this.user.inter}&password=${this.user.password}&}`,
+      })
+        .then(() => {
+          this.$router.push('/');
+        })
+        .catch((res) => {
+          console.log('signup fail', res);
+        })
     },
   },
 }

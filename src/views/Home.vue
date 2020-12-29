@@ -19,7 +19,7 @@
       title="자막 분석"
       cardWidth="270"
       cardHeight="220"
-      :items="items" 
+      :items="subItems" 
       moveTo="/Video">
     </slider>
     <slider
@@ -29,6 +29,7 @@
       :items="items"
       moveTo="/Check">
     </slider>
+    <div>{{getVideo}}</div>
   </div>
 </template>
 
@@ -43,6 +44,7 @@ export default {
   },
   data() {
     return {
+      user: this.$store.state.user.user,
       slides: [
         require('../assets/main1.jpg'),
         require('../assets/main2.jpg'),
@@ -50,96 +52,75 @@ export default {
         require('../assets/main4.jpg'),
         require('../assets/main5.jpg'),
       ],
+      subItems: [],
       items: [
-        {
-          img: require('../assets/main1.jpg'),
-          title: 'title',
-          writer: 'lumi1',
-          body: '설명합니다.',
-        },
-        {
-          img: require('../assets/main3.jpg'),
-          title: 'title',
-          writer: 'lumi2',
-          body: '설명합니다.',
-        },
-        {
-          img: require('../assets/main2.jpg'),
-          title: 'title',
-          writer: 'lumi3',
-          body: '설명합니다.',
-        },
-        {
-          img: require('../assets/main2.jpg'),
-          title: 'title',
-          writer: 'lumi4',
-          body: '설명합니다.',
-        },
-        {
-          img: require('../assets/main3.jpg'),
-          title: 'title',
-          writer: 'lumi5',
-          body: '설명합니다.',
-        },
-        {
-          img: require('../assets/main4.jpg'),
-          title: 'title',
-          writer: 'lumi6',
-          body: '설명합니다.',
-        },
-        {
-          img: require('../assets/main5.jpg'),
-          title: 'title',
-          writer: 'lumi7',
-          body: '설명합니다.',
-        },
         {
           img: require('../assets/main5.jpg'),
           title: 'title8',
           writer: 'lumi',
           body: '설명합니다.',
+          url: 'abc',
         },
         {
           img: require('../assets/main1.jpg'),
           title: 'title',
           writer: 'lumi9',
           body: '설명합니다.',
+          url: 'abc',
         },
         {
           img: require('../assets/main2.jpg'),
           title: 'title',
           writer: 'lumi10',
           body: '설명합니다.',
+          url: 'abc',
         },
         {
           img: require('../assets/main5.jpg'),
           title: 'title',
           writer: 'lumi7',
           body: '설명합니다.',
-          time: '00:00:27.00'
+          url: 'abc',
         },
         {
           img: require('../assets/main5.jpg'),
           title: 'title8',
           writer: 'lumi',
           body: '설명합니다.',
-          time: '00:00:27.00'
+          url: 'abc',
         },
-      ],
-      colors: [
-        'indigo',
-        'warning',
-        'pink darken-2',
-        'red lighten-1',
-        'deep-purple accent-4',
       ],
     }
   },
   methods: {
+    getList() {
+      this.subItems = [];
+      this.$store.dispatch('api', {
+        url: `Reco?{&User_id=${this.user.id}&}`
+      })
+      // 28
+      const sub = this.$store.state.data.substring(3, this.$store.state.data.length - 2);
+      const sp = sub.split('\', \'');
+      sp.forEach(element => {
+        const sl = element.split(': ');
+        this.subItems.push({
+          title: sl[0],
+          url: sl[1],
+        })
+      });
+      console.log('subitems', this.subItems);
+    }
   },
-  created() {
-    // this.insert('Reco');
-    // user id
+  computed: {
+    getVideo() {
+      if (this.user.id !== '') {
+        console.log('있음');
+        this.getList();
+      } else {
+        console.log('없음');
+      }
+      return this.user.id;
+    },
   },
 }
 </script>
