@@ -6,17 +6,18 @@
       height="70"
       style="position: fixed;"
     >
-      <v-toolbar-title>
+      <v-toolbar-title style="cursor: pointer">
         <img src="../assets/logo.png" width="60px" @click="$router.push('/')">
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-text-field
+        class="headerLink"
         filled
         dense
         rounded
         hide-details=""
-        placeholder="검색어를 입력하세요."
-        style="padding: 0px 4%;"></v-text-field>
+        placeholder="검색어를 입력하세요.">
+      </v-text-field>
       <!-- <v-btn
         icon
         >
@@ -57,7 +58,7 @@
         </template>
         <v-divider color="#eee"></v-divider>
         <v-list>
-            <v-list-item><h3>{{loginUser.id}}</h3></v-list-item>
+            <v-list-item><h3>{{userNow.id}}</h3></v-list-item>
             <!-- <v-list-item>{{user.email}}</v-list-item> -->
             <v-divider></v-divider>
             <v-list-item link @click="$router.push('/VideoList')">
@@ -96,6 +97,9 @@
             @click:append="show = !show"
             outlined>
           </v-text-field>
+          <div style="color: red;">
+            {{this.$store.state.user.loginfail}}
+          </div>
           <v-btn
             class="white--text"
             color="black"
@@ -126,6 +130,9 @@ export default {
   },
   methods: {
     loginDialog(flag) {
+      this.loginUser.id = '';
+      this.loginUser.password = '';
+      this.$store.commit('user/LOGINFAIL_SET', '');
       this.$store.commit('user/LOGIN_DIALOG_SET', flag);
     },
     loginBtn() {
@@ -133,6 +140,11 @@ export default {
     },
     logout() {
       this.$store.dispatch('user/logout');
+    },
+  },
+  computed: {
+    userNow() {
+      return this.$store.state.user.user;
     },
   },
 }
@@ -148,5 +160,11 @@ export default {
   padding: 0px 15%;
   background-color: #ffffff !important;
   box-shadow: none !important;
+}
+.headerLink {
+  position: absolute !important;
+  top: 15px;
+  left: 270px;
+  width: 50%;
 }
 </style>

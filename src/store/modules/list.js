@@ -7,6 +7,8 @@ const state = {
     title: '',
     url: 'no',
   },
+  keyvideo: '',
+  keylist: [],
   homeList: [],
   loading: true,
 };
@@ -21,6 +23,12 @@ const mutations = {
   },
   LOADING_SET(state, payload) {
     state.loading = payload;
+  },
+  KEYVIDEO_SET(state, payload) {
+    state.keyvideo = payload;
+  },
+  KEYLIST_SET(state, payload) {
+    state.keylist = payload;
   },
 };
   
@@ -42,7 +50,25 @@ const actions = {
       } finally {
         commit('LOADING_SET', false);
       }
-  }
+  },
+  async getkeyframe({ commit }, payload) {
+    try {
+      commit('LOADING_SET', true);
+      await index.dispatch(
+        'api',
+        {
+          url: payload.url,
+        })
+          .then(() => {
+            // console.log('list then', index.state.data);
+            commit('KEYVIDEO_SET', index.state.data);
+          })
+    } catch (err) {
+      console.log(err);
+    } finally {
+      commit('LOADING_SET', false);
+    }
+}
 };
   
 export default {

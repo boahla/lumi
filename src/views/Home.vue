@@ -18,7 +18,7 @@
     <v-row>
       <v-carousel
         cycle
-        height="600"
+        height="400"
         hide-delimiter-background
         :show-arrows="false"
       >
@@ -39,13 +39,13 @@
       moveTo="/Video">
     </slider>
     <slider
-      title="파트너 소개"
+      title="동영상 소개"
       cardWidth="340  "
       cardHeight="230"
       :items="items"
       moveTo="/Check">
     </slider>
-  <div>{{checkLogin}}</div>
+    <div style="display:none">{{checkLogin}}</div>
   </div>
 </template>
 

@@ -55,50 +55,13 @@
           </v-row>
         </div>
       </v-row>
-      <!-- <v-row class="text-center" v-if="videoloading">
-        <v-progress-circular
-          :size="70"
-          :width="7"
-          color="blue-grey"
-          indeterminate
-          style="margin: 0 auto;"
-        ></v-progress-circular>
-      </v-row>
-      <v-row v-if="videoComplete">
-        <v-col
-          v-for="(item, i) in items"
-          :key="i"
-          style="width: 300px"
-        >
-          <v-card
-            style="max-width: 350px; min-width: 300px;"
-            @click="$router.push(`/Video/${item.writer}`)">
-            <v-img
-              class="white--text align-end"
-              style="width: auto; background-color: gray;"
-              height="160px"
-              :src="item.img"
-            >
-              <v-card-title></v-card-title>
-            </v-img>
-            <v-card-title>{{item.title}}</v-card-title>
-            <v-card-subtitle>{{item.writer}}</v-card-subtitle>
-            <v-card-text
-              style="text-align: right;">
-              {{item.writer}}
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row> -->
     </v-card>
   </v-container>
 </template>
 
 <script>
-import API from '@/mixin/api';
 export default {
   name: 'VideoList',
-  mixins: [API],
   data() {
     return {
       videoItems: [
@@ -205,24 +168,13 @@ export default {
   },
   methods: {
     videoSubmit() {
-      console.log('subtitlesUBTIT', this.videoFile);
       if (this.videoFile) {
-        this.$router.push(`/Video/${this.videoFile}`);
+        this.$router.push(`/VideoResult/${this.videoFile}`);
+        this.$store.commit('list/LOGIN_DIALOG_SET', this.videoFile);
       } else {
         this.videoWarning = true;
       }
     },
-    interval() {
-      this.timer = setInterval(() => {
-        this.times += 1;
-        if (this.times >= 3) {
-          clearInterval(this.timer);
-        }
-      }, 1000);
-    },
-  },
-  created() {
-    this.bring(1, 'videolist');
   },
 }
 </script>

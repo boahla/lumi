@@ -6,6 +6,7 @@ import Video from '../components/Video.vue'
 import Home from '../views/Home.vue'
 import Check from '../views/Check.vue'
 import VideoList from '../views/VideoList.vue'
+import VideoResult from '../views/VideoResult.vue'
 import Signup from '../views/Signup.vue'
 
 Vue.use(VueRouter)
@@ -54,6 +55,15 @@ const routes = [
       header: Header,
       footer: Footer,
       default: Video,
+    },
+  },
+  {
+    path: '/videoResult/:title',
+    name: 'VideoResult',
+    components: {
+      header: Header,
+      footer: Footer,
+      default: VideoResult,
     },
   },
 ]

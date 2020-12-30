@@ -181,10 +181,8 @@
 </template>
 
 <script>
-import API from '@/mixin/api';
 export default {
   name: 'Signup',
-  mixins: [API],
   data() {
     return {
       user: {

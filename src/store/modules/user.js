@@ -9,6 +9,7 @@ const state = {
     id: '',
     password: '',
   },
+  loginfail: '',
 };
 
 const mutations = {
@@ -25,6 +26,9 @@ const mutations = {
     state.user.id = '';
     state.user.password = '';
   },
+  LOGINFAIL_SET(state, payload) {
+    state.loginfail = payload;
+  }
 };
 
 const actions = {
@@ -35,12 +39,17 @@ const actions = {
         url: `login?{&id=${payload.id}&password=${payload.password}&}`
       })
         .then(() => {
-          commit('USER_SET', payload);
-          commit('LOGIN_DIALOG_SET', false);
-          // Cookies
-          Cookies.set('access_id', payload.id);
-          Cookies.set('access_password', payload.password);
-          // router.go(router.currentRoute);
+          console.log(index.state.data);
+          if (index.state.data === '로그인 완료') {
+            commit('USER_SET', payload);
+            commit('LOGIN_DIALOG_SET', false);
+            // Cookies
+            Cookies.set('access_id', payload.id);
+            Cookies.set('access_password', payload.password);
+            commit('LOGINFAIL_SET', '');
+          } else {
+            commit('LOGINFAIL_SET', '아이디, 비밀번호 오류');
+          }
         })
         .catch((res) => {
           console.log('fail', res);

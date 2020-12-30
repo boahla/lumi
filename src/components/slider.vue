@@ -22,7 +22,8 @@
               :key="i"
             >
               <v-card
-                class="ma-4"
+                outlined
+                class="ma-4 sliderBox"
                 :height="cardHeight"
                 :width="cardWidth"
                 @click="chooseItem(item)"
@@ -72,7 +73,6 @@
     methods: {
       chooseItem(item) {
         if (this.moveTo === '/Video') {
-          console.log('tt', item.title);
           this.$store.commit('list/VIDEO_SET', item);
           this.$router.push(`${this.moveTo}/${item.title}`);
         } else {
