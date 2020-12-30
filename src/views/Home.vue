@@ -1,5 +1,20 @@
 <template>
   <div class="home">
+    <!-- <v-dialog
+      class="videoLoading"
+      v-model="stList"
+      persistent
+      width="300"
+    >
+      <v-card class="lodaingCard">
+        <v-progress-circular
+          :size="90"
+          :width="10"
+          color="white"
+          indeterminate
+        ></v-progress-circular>
+      </v-card>
+    </v-dialog> -->
     <v-row>
       <v-carousel
         cycle
@@ -16,8 +31,9 @@
       </v-carousel>
     </v-row>
     <slider
+      v-if="user.flag"
       title="자막 분석"
-      cardWidth="270"
+      cardWidth="300"
       cardHeight="220"
       :items="subItems" 
       moveTo="/Video">
@@ -29,16 +45,14 @@
       :items="items"
       moveTo="/Check">
     </slider>
-    <div>{{getVideo}}</div>
+  <div>{{checkLogin}}</div>
   </div>
 </template>
 
 <script>
 import slider from '@/components/slider';
-import API from '@/mixin/api';
 export default {
   name: 'Home',
-  mixins: [API],
   components: {
     slider,
   },
@@ -53,37 +67,38 @@ export default {
         require('../assets/main5.jpg'),
       ],
       subItems: [],
+      thumbnail: [],
       items: [
         {
-          img: require('../assets/main5.jpg'),
+          thumbnail: require('../assets/main5.jpg'),
           title: 'title8',
           writer: 'lumi',
           body: '설명합니다.',
           url: 'abc',
         },
         {
-          img: require('../assets/main1.jpg'),
+          thumbnail: require('../assets/main1.jpg'),
           title: 'title',
           writer: 'lumi9',
           body: '설명합니다.',
           url: 'abc',
         },
         {
-          img: require('../assets/main2.jpg'),
+          thumbnail: require('../assets/main2.jpg'),
           title: 'title',
           writer: 'lumi10',
           body: '설명합니다.',
           url: 'abc',
         },
         {
-          img: require('../assets/main5.jpg'),
+          thumbnail: require('../assets/main5.jpg'),
           title: 'title',
           writer: 'lumi7',
           body: '설명합니다.',
           url: 'abc',
         },
         {
-          img: require('../assets/main5.jpg'),
+          thumbnail: require('../assets/main5.jpg'),
           title: 'title8',
           writer: 'lumi',
           body: '설명합니다.',
@@ -95,32 +110,36 @@ export default {
   methods: {
     getList() {
       this.subItems = [];
-      this.$store.dispatch('api', {
+      this.$store.dispatch('list/getlist', {
+        id: this.user.id,
         url: `Reco?{&User_id=${this.user.id}&}`
       })
-      // 28
-      const sub = this.$store.state.data.substring(3, this.$store.state.data.length - 2);
-      const sp = sub.split('\', \'');
-      sp.forEach(element => {
-        const sl = element.split(': ');
-        this.subItems.push({
-          title: sl[0],
-          url: sl[1],
-        })
-      });
-      console.log('subitems', this.subItems);
-    }
+      if (this.$store.state.list.homeList !== '' && this.$store.state.list.homeList.length !== 0) {
+        const sub = this.$store.state.list.homeList.substring(2, this.$store.state.list.homeList.length - 2);
+        const sp = sub.split('\', \'');
+        sp.forEach(element => {
+          const sl = element.split(': ');
+          this.subItems.push({
+            title: sl[0],
+            url: `https://www.youtube.com/embed/${sl[1].substring(32, 43)}`,
+            thumbnail: `https://img.youtube.com/vi/${sl[1].substring(32, 43)}/mqdefault.jpg`,
+          })
+        });
+      }
+      console.log('subitems', this.user.id, this.subItems);
+    },
+    editList() {
+    },
+  },
+  mounted() {
   },
   computed: {
-    getVideo() {
-      if (this.user.id !== '') {
-        console.log('있음');
+    checkLogin() {
+      if (this.user.flag) {
         this.getList();
-      } else {
-        console.log('없음');
       }
-      return this.user.id;
-    },
+      return this.user.flag;
+    }, 
   },
 }
 </script>
@@ -128,5 +147,10 @@ export default {
 <style>
 .homeRow {
   padding: 20px 0px;
+}
+.lodaingCard {
+  background-color: unset !important;
+  overflow: hidden;
+  text-align: center;;
 }
 </style>

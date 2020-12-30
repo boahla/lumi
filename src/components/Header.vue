@@ -132,7 +132,7 @@ export default {
       this.$store.dispatch('user/login', this.loginUser);
     },
     logout() {
-      this.$store.commit('user/LOGOUT');
+      this.$store.dispatch('user/logout');
     },
   },
 }

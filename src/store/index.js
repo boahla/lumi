@@ -9,7 +9,7 @@ import list from '@/store/modules/list.js'
 
 const state = {
   host: 'http://113.198.234.132:9994/',
-  data: 'no',
+  data: '',
 };
 
 const mutations = {
@@ -19,9 +19,11 @@ const mutations = {
 };
 
 const actions = {
-  api({ commit }, payload) {
+  async api({ commit }, payload) {
     console.log('index api', `${state.host}${payload.url}`);
-    axios
+    try {
+      state.data = [];
+      await axios
       .get(`${state.host}${payload.url}`,
         {
           headers: {
@@ -29,12 +31,13 @@ const actions = {
         }
       })
       .then((res) => {
-        // console.log('index then', res);
         commit('DATA_SET', res.data);
       })
-      .catch(() => {
-        // console.log('index catch', res);
-      });
+    } catch(err) {
+      console.log(err);
+    } finally {
+      console.log('done');
+    }
   }
 };
 

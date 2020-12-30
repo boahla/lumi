@@ -1,5 +1,6 @@
 // import router from '../../router'
 import index from '../index'
+import Cookies from 'vue-cookies'
 
 const state = {
   user: {
@@ -36,11 +37,20 @@ const actions = {
         .then(() => {
           commit('USER_SET', payload);
           commit('LOGIN_DIALOG_SET', false);
+          // Cookies
+          Cookies.set('access_id', payload.id);
+          Cookies.set('access_password', payload.password);
+          // router.go(router.currentRoute);
         })
         .catch((res) => {
           console.log('fail', res);
         })
-  }
+  },
+  logout({ commit }) {
+    commit('LOGOUT');
+    Cookies.remove('access_id');
+    Cookies.remove('access_password');
+  },
 };
 
 export default {

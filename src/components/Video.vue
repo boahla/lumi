@@ -1,8 +1,7 @@
 <template>
   <v-container class="videoCont">
     <v-dialog
-      class="videoLoading"
-      v-model="videoloading"
+      v-model="listLoading"
       persistent
       width="300"
     >
@@ -26,8 +25,8 @@
         <v-col
           cols="8"
           style="height: 100%;">
-          <!-- <iframe src="https://www.youtube.com/embed/3iM_06QeZi8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-          <video width="100%" controls="controls" :src="plyVideo.url" autoplay></video>
+          <iframe :src="plyVideo.url" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <!-- <video width="100%" controls="controls" :src="plyVideo.url" autoplay></video> -->
           <h3>{{plyVideo.title}}</h3>
         </v-col>
         <v-col
@@ -42,13 +41,13 @@
               <v-list-item
                 v-for="(item, i) in recLists"
                 :key="i"
-                @click="$router.push(`/Video/${item.title}`)">
+                @click="videoLists(item)">
                 <v-list-item-avatar
                   tile
                   width="45%"
                   height="100%">
                   <v-img
-                    :src="item.img">
+                    :src="item.thumbnail">
                   </v-img>
                 </v-list-item-avatar>
                 <v-list-item-content>
@@ -73,89 +72,60 @@ export default {
     return {
       user: this.$store.state.user.user,
       plyVideo: this.$store.state.list.video,
-      videoloading: true,
-      timer: null,
-      times: 0,
-      recLists : [
-        {
-          img: require('../assets/main2.jpg'),
-          title: 'title1',
-          writer: 'lumi1',
-          body: '설명합니다.',
-        },
-        {
-          img: require('../assets/main3.jpg'),
-          title: 'title3',
-          writer: 'lumi2',
-          body: '설명합니다.',
-        },
-        {
-          img: require('../assets/main5.jpg'),
-          title: 'title2',
-          writer: 'lumi3',
-          body: '설명합니다.',
-        },
-        {
-          img: require('../assets/main2.jpg'),
-          title: 'title1',
-          writer: 'lumi1',
-          body: '설명합니다.',
-        },
-        {
-          img: require('../assets/main3.jpg'),
-          title: 'title3',
-          writer: 'lumi2',
-          body: '설명합니다.',
-        },
-        {
-          img: require('../assets/main5.jpg'),
-          title: 'title2',
-          writer: 'lumi3',
-          body: '설명합니다.',
-        },
-      ],
+      recLists : [],
     }
   },
   methods: {
-    interval() {
-      this.timer = setInterval(() => {
-        this.times += 1;
-        if (this.times >= 2) {
-          // 로딩 프로그래스 종료
-          this.videoloading = false;
-          clearInterval(this.timer);
-        }
-      }, 1000);
+    videoLists(item) {
+      this.$store.commit('list/VIDEO_SET', item);
+      this.$router.push(`/Video/${item.title}`);
     },
     getVideo() {
+      console.log('1');
       this.recLists = [];
-      this.$store.dispatch('api', {
+      this.$store.dispatch('list/getlist', {
+        id: this.user.id,
         url: `ingvideo?{&Video_name=${this.plyVideo.title}&}`,
-      })
-      const sub = this.$store.state.data.substring(3, this.$store.state.data.length - 2);
-      const sp = sub.split('\', \'');
-      sp.forEach(element => {
-        const sl = element.split(': ');
-        this.recLists.push({
-          title: sl[0],
-          url: sl[1],
-        })
       });
-      console.log('subitems', this.recLists);
+      console.log(this.listLoading);
+    },
+    editVideo() {
+      console.log(this.$store.state.list.homeList);
+      if (this.$store.state.list.homeList !== '' && this.$store.state.list.homeList.length !== 0) {
+        this.recLists = [];
+        console.log('inin');
+        const sub = this.$store.state.list.homeList.substring(2, this.$store.state.list.homeList.length - 2);
+        const sp = sub.split('\', \'');
+        sp.forEach(element => {
+          const sl = element.split(': ');
+          this.recLists.push({
+            title: sl[0],
+            url: `https://www.youtube.com/embed/${sl[1].substring(32, 43)}`,
+            thumbnail: `https://img.youtube.com/vi/${sl[1].substring(32, 43)}/mqdefault.jpg`,
+          })
+        });
+      }
+      console.log('rectdd', this.recLists);
     },
   },
-  created() {
+  mounted() {
     this.getVideo();
   },
-  mounted() {
-    this.interval();
+  computed: {
+    listLoading() {
+      return this.$store.state.list.loading;
+    },
   },
+  watch: {
+    'listLoading': 'editVideo',
+  }
 }
 </script>
 
 <style>
 .videoCont {
   max-width: 88% !important;
+  padding: 6px 12px;
 }
 .v-dialog {
   box-shadow: unset !important;
@@ -182,7 +152,7 @@ iframe {
   padding: 5% 0px !important;
 }
 .videoList {
-  height: 62.3vh;
+  height: 66.2vh;
   overflow: auto;
 }
 </style>
