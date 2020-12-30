@@ -9,6 +9,7 @@ import list from '@/store/modules/list.js'
 
 const state = {
   host: 'http://113.198.234.132:9994/',
+  host2: '', // 응소 url
   data: '',
 };
 
@@ -23,8 +24,14 @@ const actions = {
     console.log('index api', `${state.host}${payload.url}`);
     try {
       state.data = [];
+      let usehost = '';
+      if (payload.host === 'es') {
+        usehost = `${state.host2}${payload.url}`;
+      } else {
+        usehost = `${state.host}${payload.url}`;
+      }
       await axios
-      .get(`${state.host}${payload.url}`,
+      .get(usehost,
         {
           headers: {
           "Access-Control-Allow-Origin": "*",

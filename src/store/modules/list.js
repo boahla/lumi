@@ -2,7 +2,6 @@
 import index from '../index'
 
 const state = {
-  host: 'http://113.198.234.132:9994/',
   video: {
     title: '',
     url: 'no',
@@ -40,6 +39,7 @@ const actions = {
           'api',
           {
             url: payload.url,
+            host: 'cg',
           })
             .then(() => {
               // console.log('list then', index.state.data);
@@ -58,6 +58,7 @@ const actions = {
         'api',
         {
           url: payload.url,
+          host: 'es',
         })
           .then(() => {
             // console.log('list then', index.state.data);
