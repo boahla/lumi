@@ -10,21 +10,6 @@
           </v-col>
         </v-row>
         <v-divider style="margin: 3% 0px;"></v-divider>
-        <!-- <v-row>
-          <v-col>
-            <v-input
-              hide-details>
-              이름
-            </v-input>
-            <v-text-field
-              v-model="user.name"
-              outlined
-              required
-              dense
-              :rules="[rules.nameempty]">
-            </v-text-field>
-          </v-col>
-        </v-row> -->
         <v-row>
           <v-col>
             <v-input
@@ -56,31 +41,6 @@
                 dense>
               </v-text-field>
             </v-row>
-            <!-- <v-menu
-              ref="birthFlag"
-              v-model="birthFlag"
-              :close-on-content-click="false"
-              transition="scale-transition"
-              offset-y
-              max-width="290px"
-              min-width="290px"
-              dense
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-text-field
-                  v-model="user.birth"
-                  persistent-hint
-                  v-bind="attrs"
-                  @blur="user.birth"
-                  v-on="on"
-                ></v-text-field>
-              </template>
-              <v-date-picker
-                v-model="user.birth"
-                no-title
-                @input="birthFlag = false"
-              ></v-date-picker>
-            </v-menu> -->
           </v-col>
           <v-col cols="4">
             <v-input
@@ -119,15 +79,6 @@
                 >
               </v-radio>
             </v-radio-group>
-            <!-- <v-checkbox
-              v-for="(item, i) in interests"
-              :key="i"
-              v-model="user.interest"
-              :label="item.label"
-              hide-details
-              style="width: fit-content; display: inline-block;"
-              :value="item.name">
-            </v-checkbox> -->
           </v-col>
         </v-row>
         <v-row>
