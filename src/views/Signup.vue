@@ -156,7 +156,6 @@ export default {
         passempty: value => !!value || '비밀번호를 입력하세요.',
         nameempty: value => !!value || '이름을 입력하세요.',
         emailempty: value => !!value || '이메일을 입력하세요.',
-        jo: value => /(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/.test(value) || '영문, 숫자, 기호의 조합으로 8자 이상 만들어져야합니다.',
       },
     }
   },
