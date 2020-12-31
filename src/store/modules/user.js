@@ -36,7 +36,8 @@ const actions = {
     index.dispatch(
       'api',
       {
-        url: `login?{&id=${payload.id}&password=${payload.password}&}`
+        url: `login?{&id=${payload.id}&password=${payload.password}&}`,
+        host: 'cg',
       })
         .then(() => {
           console.log(index.state.data);

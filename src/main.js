@@ -4,8 +4,12 @@ import vuetify from './plugins/vuetify'
 import router from './router'
 import store from './store'
 import Cookies from 'vue-cookies'
+import VuePlyr from 'vue-plyr'
+import 'vue-plyr/dist/vue-plyr.css'
 
 Vue.use(Cookies);
+
+Vue.use(VuePlyr);
 
 Vue.config.productionTip = false;
 

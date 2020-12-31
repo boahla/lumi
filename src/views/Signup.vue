@@ -163,6 +163,7 @@ export default {
     signupBtn() {
       this.$store.dispatch('api', {
         url: `signin?{&id=${this.user.id}&age=${this.user.age}&gen=${this.user.gen}&inter=${this.user.inter}&password=${this.user.password}&}`,
+        host: 'cg',
       })
         .then(() => {
           this.$router.push('/');

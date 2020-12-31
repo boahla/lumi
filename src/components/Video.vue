@@ -27,7 +27,7 @@
           style="height: 100%;">
           <iframe :src="plyVideo.url" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           <!-- <video width="100%" controls="controls" :src="plyVideo.url" autoplay></video> -->
-          <h3>{{plyVideo.title}}</h3>
+          <h3 style="padding: 15px">{{plyVideo.title}}</h3>
         </v-col>
         <v-col
           cols="4">
@@ -36,7 +36,7 @@
             <h3>추천 동영상</h3>
           </v-input>
           <v-divider></v-divider>
-          <v-list class="videoList">
+          <v-list class="videoList" :key="plyVideo.title">
             <v-list-item-group>
               <v-list-item
                 v-for="(item, i) in recLists"
@@ -52,9 +52,6 @@
                 </v-list-item-avatar>
                 <v-list-item-content>
                   <h3>{{item.title}}</h3>
-                  <!-- <div style="padding: 3% 0%;">
-                    {{item.writer}}
-                  </div> -->
                 </v-list-item-content>
               </v-list-item>
             </v-list-item-group>
@@ -78,7 +75,8 @@ export default {
   methods: {
     videoLists(item) {
       this.$store.commit('list/VIDEO_SET', item);
-      this.$router.push(`/Video/${item.title}`);
+      this.getVideo();
+      this.$router.push(`/Video`);
     },
     getVideo() {
       console.log('1');

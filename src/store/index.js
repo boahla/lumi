@@ -9,7 +9,7 @@ import list from '@/store/modules/list.js'
 
 const state = {
   host: 'http://113.198.234.132:9994/',
-  host2: '', // 응소 url
+  host2: 'http://113.198.230.13/keyframe/', // 응소 url
   data: '',
 };
 

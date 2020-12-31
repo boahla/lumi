@@ -74,7 +74,7 @@
       chooseItem(item) {
         if (this.moveTo === '/Video') {
           this.$store.commit('list/VIDEO_SET', item);
-          this.$router.push(`${this.moveTo}/${item.title}`);
+          this.$router.push(`${this.moveTo}`);
         } else {
           this.$router.push(this.moveTo);
         }
@@ -89,7 +89,7 @@
 .slider {
   max-width: 1300px !important;
   width: 100% !important;
-  padding: 30px 12px !important;
+  padding: 20px 12px !important;
 }
 .photo {
   height: 60%;

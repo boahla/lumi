@@ -49,7 +49,7 @@ const routes = [
     },
   },
   {
-    path: '/video/:title',
+    path: '/video',
     name: 'Video',
     components: {
       header: Header,
@@ -58,7 +58,7 @@ const routes = [
     },
   },
   {
-    path: '/videoResult/:title',
+    path: '/videoResult',
     name: 'VideoResult',
     components: {
       header: Header,

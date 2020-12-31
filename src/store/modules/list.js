@@ -7,6 +7,7 @@ const state = {
     url: 'no',
   },
   keyvideo: '',
+  keyvideoText: '',
   keylist: [],
   homeList: [],
   loading: true,
@@ -24,7 +25,8 @@ const mutations = {
     state.loading = payload;
   },
   KEYVIDEO_SET(state, payload) {
-    state.keyvideo = payload;
+    state.keyvideo = payload.state;
+    state.keyvideoText = payload.text;
   },
   KEYLIST_SET(state, payload) {
     state.keylist = payload;
@@ -53,6 +55,7 @@ const actions = {
   },
   async getkeyframe({ commit }, payload) {
     try {
+      commit('KEYLIST_SET', '');
       commit('LOADING_SET', true);
       await index.dispatch(
         'api',
@@ -62,7 +65,7 @@ const actions = {
         })
           .then(() => {
             // console.log('list then', index.state.data);
-            commit('KEYVIDEO_SET', index.state.data);
+            commit('KEYLIST_SET', index.state.data);
           })
     } catch (err) {
       console.log(err);

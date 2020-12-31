@@ -15,7 +15,6 @@
       </v-card>
     </v-dialog>
     <v-card>
-
     </v-card>
     <v-card
       outlined
@@ -25,9 +24,21 @@
         <v-col
           cols="8"
           style="height: 100%;">
-          <iframe src="https://www.youtube.com/embed/hVOOyM5Sl24" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          <!-- <video width="100%" controls="controls" :src="plyVideo.url" autoplay></video> -->
-          <h3>{{plyVideo.keyvideo}}</h3>
+          <vue-plyr ref="plyVideo.keylist">
+            <video 
+              :key="plyVideo.keylist.vidpath">
+              <source
+                :src="plyVideo.keylist.vidpath"
+                type="video/mp4">
+            </video>
+          </vue-plyr>
+          <!-- ../videos/2.mp4 -->
+          <!-- <iframe src="https://www.youtube.com/embed/6l-JtRhNRMg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+          <!-- <video width="100%" controls="controls" autoplay>
+            <source :src="plyVideo.keylist.vidpath" type="video/mp4">
+          </video> -->
+          <h3 style="padding: 20px 15px 5px 15px;">{{plyVideo.keyvideoText}}</h3>
+          <h4 v-if="!listLoading" style="padding: 0px 15px;">시간 : {{plyVideo.keylist.TimeSpend}}</h4>
         </v-col>
         <v-col
           cols="4">
@@ -38,12 +49,11 @@
           <v-divider></v-divider>
           <v-list class="videoList">
             <v-item-group
-              v-model="selected"
               multiple
             >
               <v-row>
                 <v-col
-                  v-for="(item, i) in recLists.keyframe"
+                  v-for="(item, i) in recLists.keyframes"
                   :key="i"
                   cols="12"
                   md="6"
@@ -52,7 +62,7 @@
                   <v-item>
                     <v-img
                       :src="item"
-                      height="120"
+                      height="150"
                     >
                     </v-img>
                   </v-item>
@@ -73,101 +83,15 @@ export default {
     return {
       user: this.$store.state.user.user,
       plyVideo: this.$store.state.list,
-      recLists : [
-        {
-          thumbnail: require('../assets/main1.jpg'),
-          title: 'title',
-          writer: 'lumi1',
-          body: '설명합니다.',
-          time: '00:00:27.00'
-        },
-        {
-          thumbnail: require('../assets/main3.jpg'),
-          title: 'title',
-          writer: 'lumi2',
-          body: '설명합니다.',
-          time: '00:00:27.00'
-        },
-        {
-          thumbnail: require('../assets/main2.jpg'),
-          title: 'title',
-          writer: 'lumi3',
-          body: '설명합니다.',
-          time: '00:00:27.00'
-        },
-        {
-          thumbnail: require('../assets/main2.jpg'),
-          title: 'title',
-          writer: 'lumi4',
-          body: '설명합니다.',
-          time: '00:00:27.00'
-        },
-        {
-          thumbnail: require('../assets/main3.jpg'),
-          title: 'title',
-          writer: 'lumi5',
-          body: '설명합니다.',
-          time: '00:00:27.00'
-        },
-        {
-          thumbnail: require('../assets/main4.jpg'),
-          title: 'title',
-          writer: 'lumi6',
-          body: '설명합니다.',
-          time: '00:00:27.00'
-        },
-        {
-          thumbnail: require('../assets/main5.jpg'),
-          title: 'title',
-          writer: 'lumi7',
-          body: '설명합니다.',
-          time: '00:00:27.00'
-        },
-        {
-          thumbnail: require('../assets/main5.jpg'),
-          title: 'title8',
-          writer: 'lumi',
-          body: '설명합니다.',
-          time: '00:00:27.00'
-        },
-        {
-          thumbnail: require('../assets/main1.jpg'),
-          title: 'title',
-          writer: 'lumi9',
-          body: '설명합니다.',
-          time: '00:00:27.00'
-        },
-        {
-          thumbnail: require('../assets/main2.jpg'),
-          title: 'title',
-          writer: 'lumi10',
-          body: '설명합니다.',
-          time: '00:00:27.00'
-        },
-        {
-          thumbnail: require('../assets/main2.jpg'),
-          title: 'title',
-          writer: 'lumi10',
-          body: '설명합니다.',
-          time: '00:00:27.00'
-        },
-        {
-          thumbnail: require('../assets/main2.jpg'),
-          title: 'title',
-          writer: 'lumi10',
-          body: '설명합니다.',
-          time: '00:00:27.00'
-        },
-      ],
+      recLists : [],
     }
   },
   methods: {
     getVideo() {
       console.log('1');
       this.recLists = [];
-      this.$store.dispatch('list/getlist', {
-        id: this.user.id,
-        url: `ingvideo?{&Video_name=${this.plyVideo.title}&}`,
+      this.$store.dispatch('list/getkeyframe', {
+        url: `${this.$store.state.list.keyvideo}`,
       });
       console.log(this.listLoading);
     },
@@ -180,10 +104,12 @@ export default {
     },
   },
   mounted() {
+    console.log('videoResult', this.plyVideo.keylist);
     this.getVideo();
   },
   computed: {
     listLoading() {
+      console.log(this.plyVideo.keylist.vidpath);
       return this.$store.state.list.loading;
     },
   },
