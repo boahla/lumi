@@ -6,8 +6,8 @@
       height="70"
       style="position: fixed;"
     >
-      <v-toolbar-title style="cursor: pointer">
-        <img src="../assets/logo.png" width="60px" @click="$router.push('/')">
+      <v-toolbar-title style="cursor: pointer; height:36px;">
+        <img src="../assets/castio_logo.png" width="150px" @click="$router.push('/')">
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-text-field
@@ -64,6 +64,10 @@
             <v-list-item link @click="$router.push('/VideoList')">
               <v-icon class="mr-2" color="#595959">mdi-arrow-up-bold-box-outline</v-icon>
               동영상 분석
+            </v-list-item>
+            <v-list-item link @click="$router.push('/VideoCompare')">
+              <v-icon class="mr-2" color="#595959">mdi-monitor-dashboard</v-icon>
+              동영상 비교 
             </v-list-item>
             <v-divider></v-divider>
             <v-list-item link @click="logout">

@@ -31,7 +31,7 @@
       </v-carousel>
     </v-row>
     <slider
-      v-if="user.flag"
+      v-if="checkLogin"
       title="자막 분석"
       cardWidth="300"
       cardHeight="220"
@@ -45,7 +45,6 @@
       :items="items"
       moveTo="/Check">
     </slider>
-    <div style="display:none">{{checkLogin}}</div>
   </div>
 </template>
 
@@ -60,11 +59,11 @@ export default {
     return {
       user: this.$store.state.user.user,
       slides: [
-        require('../assets/main1.jpg'),
-        require('../assets/main2.jpg'),
-        require('../assets/main3.jpg'),
-        require('../assets/main4.jpg'),
-        require('../assets/main5.jpg'),
+        require('../assets/castio1.png'),
+        require('../assets/castio2.png'),
+        require('../assets/castio3.png'),
+        require('../assets/castio4.png'),
+        require('../assets/castio5.png'),
       ],
       subItems: [],
       thumbnail: [],

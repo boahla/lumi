@@ -14,8 +14,6 @@
         ></v-progress-circular>
       </v-card>
     </v-dialog>
-    <v-card>
-    </v-card>
     <v-card
       outlined
       color="white"
