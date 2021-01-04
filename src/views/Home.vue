@@ -1,24 +1,9 @@
 <template>
   <div class="home">
-    <!-- <v-dialog
-      class="videoLoading"
-      v-model="stList"
-      persistent
-      width="300"
-    >
-      <v-card class="lodaingCard">
-        <v-progress-circular
-          :size="90"
-          :width="10"
-          color="white"
-          indeterminate
-        ></v-progress-circular>
-      </v-card>
-    </v-dialog> -->
     <v-row>
       <v-carousel
         cycle
-        height="400"
+        height="460"
         hide-delimiter-background
         :show-arrows="false"
       >
@@ -71,36 +56,26 @@ export default {
         {
           thumbnail: require('../assets/main5.jpg'),
           title: 'title8',
-          writer: 'lumi',
-          body: '설명합니다.',
           url: 'abc',
         },
         {
           thumbnail: require('../assets/main1.jpg'),
           title: 'title',
-          writer: 'lumi9',
-          body: '설명합니다.',
           url: 'abc',
         },
         {
           thumbnail: require('../assets/main2.jpg'),
           title: 'title',
-          writer: 'lumi10',
-          body: '설명합니다.',
           url: 'abc',
         },
         {
           thumbnail: require('../assets/main5.jpg'),
           title: 'title',
-          writer: 'lumi7',
-          body: '설명합니다.',
           url: 'abc',
         },
         {
           thumbnail: require('../assets/main5.jpg'),
           title: 'title8',
-          writer: 'lumi',
-          body: '설명합니다.',
           url: 'abc',
         },
       ],

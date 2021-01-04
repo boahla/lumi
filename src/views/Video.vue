@@ -1,22 +1,17 @@
 <template>
   <v-container class="videoCont">
-    <v-dialog
-      v-model="listLoading"
-      persistent
-      width="300"
+    <v-overlay
+      :absolute="absolute"
+      :value="listLoading"
+      opacity="0.4"
     >
-      <v-card class="lodaingCard">
-        <v-progress-circular
-          :size="90"
-          :width="10"
-          color="white"
-          indeterminate
-        ></v-progress-circular>
-      </v-card>
-    </v-dialog>
-    <v-card>
-
-    </v-card>
+      <v-progress-circular
+        :size="90"
+        :width="10"
+        color="white"
+        indeterminate
+      ></v-progress-circular>
+    </v-overlay>
     <v-card
       outlined
       color="white"
@@ -41,16 +36,21 @@
               <v-list-item
                 v-for="(item, i) in recLists"
                 :key="i"
-                @click="videoLists(item)">
+                @click="videoLists(item)"
+                class="vidListItem">
+                <v-list-item-action class="itemValue">
+                  {{item.per}}%
+                </v-list-item-action>
                 <v-list-item-avatar
                   tile
                   width="45%"
-                  height="100%">
+                  height="100%"
+                  style="margin: 5px 10px;">
                   <v-img
                     :src="item.thumbnail">
                   </v-img>
                 </v-list-item-avatar>
-                <v-list-item-content>
+                <v-list-item-content class="videoItemCont">
                   <h3>{{item.title}}</h3>
                 </v-list-item-content>
               </v-list-item>
@@ -69,6 +69,7 @@ export default {
     return {
       user: this.$store.state.user.user,
       plyVideo: this.$store.state.list.video,
+      absolute: true,
       recLists : [],
     }
   },
@@ -100,6 +101,7 @@ export default {
             title: sl[0],
             url: `https://www.youtube.com/embed/${sl[1].substring(32, 43)}`,
             thumbnail: `https://img.youtube.com/vi/${sl[1].substring(32, 43)}/mqdefault.jpg`,
+            per: (Number.parseFloat(sl[2]) * 100).toFixed(0),
           })
         });
       }
@@ -125,32 +127,28 @@ export default {
   max-width: 88% !important;
   padding: 6px 12px;
 }
-.v-dialog {
-  box-shadow: unset !important;
-}
-.videoCont >>> .v-dialog {
-  box-shadow: unset !important;
-}
-.lodaingCard {
-  background-color: unset !important;
-  overflow: hidden;
-  text-align: center;;
-}
-iframe {
-  width: 100%;
-  height: 66vh;
-}
-iframe {
-  width: 100%;
-  height: 66vh;
-}
 .videoCont .v-list-item__content {
   align-items: start !important;
   align-self: start !important;
   padding: 5% 0px !important;
 }
+/* .videoItemCont {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  height: 6.3em;
+} */
+.videoCont .v-list-item__action {
+  margin-right: 0px !important;
+}
 .videoList {
   height: 66.2vh;
   overflow: auto;
 }
+/* .vidListItem {
+  height: 140px;
+} */
 </style>

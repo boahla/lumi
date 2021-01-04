@@ -1,19 +1,18 @@
 <template>
   <v-container class="videoCont">
-    <v-dialog
-      v-model="listLoading"
-      persistent
-      width="300"
+    <!-- listLoading -->
+    <v-overlay
+      :absolute="absolute"
+      :value="listLoading"
+      opacity="0.4"
     >
-      <v-card class="lodaingCard">
-        <v-progress-circular
-          :size="90"
-          :width="10"
-          color="white"
-          indeterminate
-        ></v-progress-circular>
-      </v-card>
-    </v-dialog>
+      <v-progress-circular
+        :size="90"
+        :width="10"
+        color="white"
+        indeterminate
+      ></v-progress-circular>
+    </v-overlay>
     <v-card
       outlined
       color="white"
@@ -81,6 +80,7 @@ export default {
     return {
       user: this.$store.state.user.user,
       plyVideo: this.$store.state.list,
+      absolute: true,
       recLists : [],
     }
   },

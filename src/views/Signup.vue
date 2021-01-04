@@ -93,7 +93,7 @@
               required
               type="password"
               dense
-              :rules="[rules.passempty, rules.jo]">
+              :rules="[rules.passempty]">
             </v-text-field>
           </v-col>
         </v-row>
