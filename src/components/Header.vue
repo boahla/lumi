@@ -10,19 +10,6 @@
         <img src="../assets/castio_logo.png" width="150px" @click="$router.push('/')">
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-text-field
-        class="headerLink"
-        filled
-        dense
-        rounded
-        hide-details=""
-        placeholder="검색어를 입력하세요.">
-      </v-text-field>
-      <!-- <v-btn
-        icon
-        >
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn> -->
       <v-btn
         v-if="!user.flag"
         depressed
@@ -164,11 +151,5 @@ export default {
   padding: 0px 15%;
   background-color: #ffffff !important;
   box-shadow: none !important;
-}
-.headerLink {
-  position: absolute !important;
-  top: 15px;
-  left: 270px;
-  width: 50%;
 }
 </style>

@@ -44,12 +44,12 @@ const actions = {
             host: 'cg',
           })
             .then(() => {
-              // console.log('list then', index.state.data);
               commit('VIDEOLIST_SET', index.state.data);
             })
       } catch (err) {
         console.log(err);
       } finally {
+        console.log('sd', state.keylist);
         commit('LOADING_SET', false);
       }
   },
@@ -64,7 +64,6 @@ const actions = {
           host: 'es',
         })
           .then(() => {
-            // console.log('list then', index.state.data);
             commit('KEYLIST_SET', index.state.data);
           })
     } catch (err) {

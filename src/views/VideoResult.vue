@@ -9,7 +9,7 @@
       <v-progress-circular
         :size="90"
         :width="10"
-        color="white"
+        color="white" 
         indeterminate
       ></v-progress-circular>
     </v-overlay>
@@ -25,15 +25,11 @@
             <video 
               :key="plyVideo.keylist.vidpath">
               <source
-                :src="plyVideo.keylist.vidpath"
                 type="video/mp4">
             </video>
           </vue-plyr>
-          <!-- ../videos/2.mp4 -->
-          <!-- <iframe src="https://www.youtube.com/embed/6l-JtRhNRMg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-          <!-- <video width="100%" controls="controls" autoplay>
-            <source :src="plyVideo.keylist.vidpath" type="video/mp4">
-          </video> -->
+          <!-- :src="plyVideo.keylist.vidpath" -->
+          <!-- src="../videos/2.mp4" -->
           <h3 style="padding: 20px 15px 5px 15px;">{{plyVideo.keyvideoText}}</h3>
           <h4 v-if="!listLoading" style="padding: 0px 15px;">시간 : {{plyVideo.keylist.TimeSpend}}</h4>
         </v-col>
@@ -41,7 +37,7 @@
           cols="4">
           <v-input
             hide-details="">
-            <h3>Keyframe</h3>
+            <h3>Keyf  rame</h3>
           </v-input>
           <v-divider></v-divider>
           <v-list class="videoList">
@@ -86,7 +82,6 @@ export default {
   },
   methods: {
     getVideo() {
-      console.log('1');
       this.recLists = [];
       this.$store.dispatch('list/getkeyframe', {
         url: `${this.$store.state.list.keyvideo}`,
@@ -97,7 +92,6 @@ export default {
       console.log(this.plyVideo.keylist);
       if (this.plyVideo.keylist !== '' && this.plyVideo.keylist !== 0) {
         this.recLists = this.plyVideo.keylist;
-        console.log('inin');
       }
     },
   },
@@ -107,7 +101,6 @@ export default {
   },
   computed: {
     listLoading() {
-      console.log(this.plyVideo.keylist.vidpath);
       return this.$store.state.list.loading;
     },
   },
