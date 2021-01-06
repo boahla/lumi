@@ -49,7 +49,7 @@ const actions = {
       } catch (err) {
         console.log(err);
       } finally {
-        console.log('sd', state.keylist);
+        console.log('keylist', state.keylist);
         commit('LOADING_SET', false);
       }
   },

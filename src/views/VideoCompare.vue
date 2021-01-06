@@ -28,41 +28,60 @@
                 </v-tab>
                 <v-tab-item class="tabitem">
                   <v-card flat>
-                    <v-select
-                      class="vidSelect"
-                      v-model="vidSelect"
-                      outlined
-                      dense
-                      hide-details
-                      return-object
-                      :items="videoItems"
-                      item-value="state"
-                      item-text="text">
-                    </v-select>
-                    <v-btn
-                      class="compBtn white--text"
-                      depressed
-                      height="40px"
-                      color="rgba(0, 0, 0, 0.3)"
-                      @click="uploadVideo">
-                      확인
-                    </v-btn>
+                    <v-row>
+                      <v-col
+                        cols="10">
+                        <v-select
+                          class="vidSelect"
+                          v-model="vidSelect"
+                          outlined
+                          dense
+                          hide-details
+                          return-object
+                          :items="videoItems"
+                          item-value="state"
+                          item-text="text">
+                        </v-select>
+                      </v-col>
+                      <v-col
+                        cols="2">
+                        <v-btn
+                          class="compBtn white--text"
+                          depressed
+                          height="40px"
+                          color="rgba(0, 0, 0, 0.3)"
+                          @click="uploadVideo('select')">
+                          확인
+                        </v-btn>
+                      </v-col>
+                    </v-row>
                   </v-card>
                 </v-tab-item>
                 <v-tab-item class="tabitem">
                   <v-card flat>
-                    <v-file-input
-                      hide-details
-                    >
-                    </v-file-input>
-                    <v-btn
-                      class="compBtn white--text"
-                      depressed
-                      height="40px"
-                      color="rgba(0, 0, 0, 0.3)"
-                      @click="uploadVideo">
-                      확인
-                    </v-btn>
+                    <v-row>
+                      <v-col
+                        cols="10">
+                        <v-file-input
+                          v-model="file"
+                          outlined
+                          hide-details
+                          dense
+                        >
+                        </v-file-input>
+                      </v-col>
+                      <v-col
+                        cols="2">
+                        <v-btn
+                          class="compBtn white--text"
+                          depressed
+                          height="40px"
+                          color="rgba(0, 0, 0, 0.3)"
+                          @click="uploadVideo('file')">
+                          확인
+                        </v-btn>
+                      </v-col>
+                    </v-row>
                   </v-card>
                 </v-tab-item>
               </v-tabs>
@@ -145,20 +164,28 @@
           { state: 23, text: '정보보안 23주차'}, { state: 24, text: '정보보안 24주차'},
         ],
         show: false,
-        fileIntput: true,
+        file: [],
       }
     },
     methods: {
       getVideo() {
-        this.$store.commit('list/KEYVIDEO_SET', this.vidSelect);
         this.recLists = [];
         this.listLoading2 = true;
         this.$store.dispatch('list/getkeyframe', {
           url: `${this.$store.state.list.keyvideo}`,
         });
       },
-      uploadVideo() {
+      uploadVideo(mode) {
         this.show = true;
+        if ( mode === 'select') {
+          this.$store.commit('list/KEYVIDEO_SET', this.vidSelect);
+        } else if ( mode === 'file' ) {
+          const fileInfo = this.file.name.substr(0, this.file.name.length - 4);
+          this.$store.commit('list/KEYVIDEO_SET', {
+            state: fileInfo,
+            url: fileInfo,
+          });
+        }
         this.getVideo();
       },
       checkTime() {
@@ -193,13 +220,8 @@
 .videoComCon {
   max-width: 1300px !important;
 }
-.vidSelect {
-  display: inline-block;
-  width: 83%;
-}
 .compBtn {
-  float: right;
-  width: 13%;
+  width: 60%;
 }
 .loading {
   /* height: 408px; */
@@ -231,5 +253,9 @@
 .tabitem {
   padding: 10px 0px;
   height: 60px;
+}
+.tabitem .col {
+  padding: 0px !important;
+  text-align: center;
 }
 </style>
