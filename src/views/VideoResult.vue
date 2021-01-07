@@ -25,6 +25,7 @@
             <video 
               :key="plyVideo.keylist.vidpath">
               <source
+                :src="plyVideo.keylist.vidpath"
                 type="video/mp4">
             </video>
           </vue-plyr>
@@ -37,7 +38,7 @@
           cols="4">
           <v-input
             hide-details="">
-            <h3>Keyf  rame</h3>
+            <h3>Keyframe</h3>
           </v-input>
           <v-divider></v-divider>
           <v-list class="videoList">

@@ -8,8 +8,8 @@ import user from '@/store/modules/user.js'
 import list from '@/store/modules/list.js'
 
 const state = {
-  host: 'http://113.198.234.132:9994/',
-  host2: 'http://113.198.230.13/keyframe/', // 응소 url
+  host: 'http://113.198.234.132:9994/', // 컴공 api
+  host2: 'http://113.198.230.13/keyframe/', // 응소 api
   data: '',
 };
 
