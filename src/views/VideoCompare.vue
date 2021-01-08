@@ -101,12 +101,12 @@
                 ></v-progress-circular>
               </div>
               <div v-show="!listLoading" class="videoBox">
-                <vue-plyr>
-                  <video>
-                    <source
-                      type="video/mp4">
+                <vue-plyr ref="plyVideo.keylist">
+                  <video
+                    :src="plyVideo.keylist.vidpath"
+                    type="video/mp4"
+                    >
                   </video>
-                  <!-- src="../videos/2.mp4" -->
                 </vue-plyr>
                 <div class="p">time: {{timeSpend1}}</div>
               </div>
@@ -124,11 +124,12 @@
                 ></v-progress-circular>
               </div>
               <div v-show="!listLoading2" class="videoBox">
-                <vue-plyr>
-                  <video>
-                    <source
-                      type="video/mp4">/>
-                      </video>
+                <vue-plyr ref="plyVideo.keylist">
+                  <video
+                    :src="plyVideo.keylist.vidpath"
+                    type="video/mp4"
+                    >
+                  </video>
                 </vue-plyr>
                 <div class="p">time: {{timeSpend2.toFixed(2)}}s</div>
               </div>
@@ -144,7 +145,7 @@
     name: 'VideoCompare',
     data() {
       return {
-        keylist: this.$store.state.list,
+        // plyVideo: this.$store.state.list,
         listLoading2 : false,
         timeSpend1: 0,
         timeSpend2: 0,
@@ -190,19 +191,22 @@
       },
       checkTime() {
         const time = (Math.random() * 6 + 3).toFixed(2);
-        this.timeSpend1 = this.keylist.keylist.TimeSpend;
+        this.timeSpend1 = this.plyVideo.keylist.TimeSpend;
         console.log('tiem', time);
-        console.log('this.kelist.timespend', this.keylist.keylist.TimeSpend);
+        console.log('this.kelist', this.plyVideo.keylist.vidpath);
         if (!this.listLoading && this.$store.state.list.keylist !== '' && this.$store.state.list.keylist !== 0) {
           setTimeout(() => {
             this.listLoading2 = false;
             this.timeSpend2
-              = Number.parseFloat(this.keylist.keylist.TimeSpend) + Number.parseFloat(time);
+              = Number.parseFloat(this.plyVideo.keylist.TimeSpend) + Number.parseFloat(time);
           }, Number.parseFloat(time) * 1000);
         }
       },
     },
     computed: {
+      plyVideo() {
+        return this.$store.state.list;
+      },
       listLoading() {
         return this.$store.state.list.loading;
       },
