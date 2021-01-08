@@ -22,11 +22,9 @@
           cols="8"
           style="height: 100%;">
           <vue-plyr ref="plyVideo.keylist">
-            <video 
-              :key="plyVideo.keylist.vidpath">
-              <source
-                :src="plyVideo.keylist.vidpath"
-                type="video/mp4">
+            <video
+              :src="plyVideo.keylist.vidpath"
+              type="video/mp4">
             </video>
           </vue-plyr>
           <!-- :src="plyVideo.keylist.vidpath" -->

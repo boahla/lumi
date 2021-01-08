@@ -3,6 +3,24 @@
     <v-card
       outlined
       color="white">
+      <v-snackbar
+        v-model="warning"
+        :timeout="warntimer"
+        top
+        color="red"
+      >
+        {{ errortext }}
+        <template v-slot:action="{ attrs }">
+          <v-btn
+            color="blue"
+            text
+            v-bind="attrs"
+            @click="warning = false"
+          >
+            <v-icon color="white">mdi-close</v-icon>
+          </v-btn>
+        </template>
+      </v-snackbar>
       <div style="max-width: 550px; min-width: 450px; margin: 0 auto;">
         <v-row style="padding-top: 3%;">
           <v-col>
@@ -157,20 +175,37 @@ export default {
         nameempty: value => !!value || '이름을 입력하세요.',
         emailempty: value => !!value || '이메일을 입력하세요.',
       },
+      warning: false,
+      warntimer: 2000,
+      errortext: '',
     }
   },
   methods: {
     signupBtn() {
-      this.$store.dispatch('api', {
-        url: `signin?{&id=${this.user.id}&age=${this.user.age}&gen=${this.user.gen}&inter=${this.user.inter}&password=${this.user.password}&}`,
-        host: 'cg',
-      })
-        .then(() => {
-          this.$router.push('/');
+      let flag = false;
+      for (let i in this.user) {
+        if (this.user[i] === '') {
+          this.warning = true;
+          this.errortext = '모든 양식을 입력해주세요.';
+          flag = false;
+        } else {
+          flag = true;
+        }
+      }
+      if (flag) {
+        this.$store.dispatch('api', {
+          url: `signin?{&id=${this.user.id}&age=${this.user.age}&gen=${this.user.gen}&inter=${this.user.inter}&password=${this.user.password}&}`,
+          host: 'cg',
         })
-        .catch((res) => {
-          console.log('signup fail', res);
-        })
+          .then(() => {
+            if (this.$store.state.data === 'ID 중복') {
+              this.warning = true;
+              this.errortext = 'ID 중복입니다.';
+            } else {
+              this.$router.push('/');
+            }
+          })
+      }
     },
   },
 }
