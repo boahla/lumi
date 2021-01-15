@@ -111,7 +111,7 @@
               required
               type="password"
               dense
-              :rules="[rules.passempty]">
+              :rules="[rules.passempty, rules.onlynumber]">
             </v-text-field>
           </v-col>
         </v-row>
@@ -174,6 +174,7 @@ export default {
         passempty: value => !!value || '비밀번호를 입력하세요.',
         nameempty: value => !!value || '이름을 입력하세요.',
         emailempty: value => !!value || '이메일을 입력하세요.',
+        onlynumber: value => /^[0-9]*$/.test(value) || '숫자만 입력하세요.',
       },
       warning: false,
       warntimer: 2000,
