@@ -21,7 +21,6 @@ const mutations = {
 
 const actions = {
   async api({ commit }, payload) {
-    console.log('index api', `${state.host}${payload.url}`);
     try {
       state.data = [];
       let usehost = '';
