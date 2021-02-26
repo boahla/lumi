@@ -30,7 +30,7 @@
           <!-- :src="plyVideo.keylist.vidpath" -->
           <!-- src="../videos/2.mp4" -->
           <h3 style="padding: 20px 15px 5px 15px;">{{plyVideo.keyvideoText}}</h3>
-          <h4 v-if="!listLoading" style="padding: 0px 15px;">시간 : {{plyVideo.keylist.TimeSpend}}</h4>
+          <h4 v-if="!listLoading" style="padding: 0px 15px;">시간 : {{plyVideo.keylist.TimeSpend.split('s')[0] / 3}} 초</h4>
         </v-col>
         <v-col
           cols="4">

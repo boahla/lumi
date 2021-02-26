@@ -18,13 +18,13 @@
                   <v-icon left>
                     mdi-check-box-multiple-outline
                   </v-icon>
-                  Select
+                  스트리밍 서비스
                 </v-tab>
                 <v-tab>
                   <v-icon left>
                     mdi-file-document-multiple-outline
                   </v-icon>
-                  File
+                  디디캠 서버
                 </v-tab>
                 <v-tab-item class="tabitem">
                   <v-card flat>
