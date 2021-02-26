@@ -22,7 +22,7 @@
       <v-row
         style="border-bottom: solid 1px rgba(0, 0, 0, 0.12);">
         <v-col>
-          <h3>스트리밍 성능 비교</h3>
+          <h3>데이터 처리 속도 비교</h3>
         </v-col>
       </v-row>
       <v-row

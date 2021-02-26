@@ -50,11 +50,11 @@
             <v-divider></v-divider>
             <v-list-item link @click="$router.push('/VideoList')">
               <v-icon class="mr-2" color="#595959">mdi-arrow-up-bold-box-outline</v-icon>
-              스트리밍 성능 비교
+              데이터 처리 속도 비교
             </v-list-item>
             <v-list-item link @click="$router.push('/VideoCompare')">
               <v-icon class="mr-2" color="#595959">mdi-monitor-dashboard</v-icon>
-              데이터 처리 속도 비교
+              스트리밍 성능 비교
             </v-list-item>
             <v-divider></v-divider>
             <v-list-item link @click="logout">
