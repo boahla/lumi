@@ -17,6 +17,7 @@
       outlined
       color="white"
       >
+      <v-card-title>DIDICAM LMS</v-card-title>
       <v-row style="padding: 2% 0px !important;">
         <v-col
           cols="8"
@@ -31,6 +32,59 @@
           <!-- src="../videos/2.mp4" -->
           <h3 style="padding: 20px 15px 5px 15px;">{{plyVideo.keyvideoText}}</h3>
           <h4 v-if="!listLoading" style="padding: 0px 15px;">시간 : {{plyVideo.keylist.TimeSpend.split('s')[0] / 3}} 초</h4>
+        </v-col>
+        <v-col
+          cols="4">
+          <v-input
+            hide-details="">
+            <h3>Keyframe</h3>
+          </v-input>
+          <v-divider></v-divider>
+          <v-list class="videoList">
+            <v-item-group
+              multiple
+            >
+              <v-row>
+                <v-col
+                  v-for="(item, i) in recLists.keyframes"
+                  :key="i"
+                  cols="12"
+                  md="6"
+                  style="padding: 2px;"
+                >
+                  <v-item>
+                    <v-img
+                      :src="item"
+                      height="150"
+                    >
+                    </v-img>
+                  </v-item>
+                </v-col>
+              </v-row>
+            </v-item-group>
+          </v-list>
+        </v-col>
+      </v-row>
+    </v-card>
+    <v-card
+      outlined
+      color="white"
+      >
+      <v-card-title>EMBDED DESK JOB</v-card-title>
+      <v-row style="padding: 2% 0px !important;">
+        <v-col
+          cols="8"
+          style="height: 100%;">
+          <vue-plyr ref="plyVideo.keylist">
+            <video
+              :src="plyVideo.keylist.vidpath"
+              type="video/mp4">
+            </video>
+          </vue-plyr>
+          <!-- :src="plyVideo.keylist.vidpath" -->
+          <!-- src="../videos/2.mp4" -->
+          <h3 style="padding: 20px 15px 5px 15px;">{{plyVideo.keyvideoText}}</h3>
+          <h4 v-if="!listLoading" style="padding: 0px 15px;">시간 : {{plyVideo.keylist.TimeSpend.split('s')[0]}} 초</h4>
         </v-col>
         <v-col
           cols="4">

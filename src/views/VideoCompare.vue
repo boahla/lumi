@@ -7,7 +7,7 @@
         <v-row
           style="border-bottom: solid 1px rgba(0, 0, 0, 0.12);">
           <v-col>
-            <h3>동영상 비교</h3>
+            <h3>데이터 처리 속도 비교</h3>
           </v-col>
         </v-row>
         <v-row>
@@ -91,6 +91,7 @@
         <v-row v-if="show" class="rowShow">
           <v-col cols="6" class="comCol">
             <v-card outlined>
+              <v-card-title>스트리밍 서비스</v-card-title>
               <div v-show="listLoading" class="loading">
                 <v-progress-circular
                   :size="60"
@@ -114,6 +115,7 @@
           </v-col>
           <v-col cols="6" class="comCol">
             <v-card outlined>
+              <v-card-title>디디캠 서비스</v-card-title>
               <div v-show="listLoading2" class="loading">
                 <v-progress-circular
                   :size="60"
