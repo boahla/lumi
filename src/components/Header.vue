@@ -57,6 +57,11 @@
               스트리밍 성능 비교
             </v-list-item>
             <v-divider></v-divider>
+            <v-list-item link @click="$router.push('/Compare')">
+              <v-icon class="mr-2" color="#595959">mdi-monitor-dashboard</v-icon>
+              키프레임 추출
+            </v-list-item>
+            <v-divider></v-divider>
             <v-list-item link @click="logout">
               <v-icon class="mr-2" color="#595959">mdi-logout</v-icon>
               로그아웃

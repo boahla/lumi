@@ -9,6 +9,7 @@ import VideoList from '../views/VideoList.vue'
 import VideoResult from '../views/VideoResult.vue'
 import Signup from '../views/Signup.vue'
 import VideoCompare from '../views/VideoCompare.vue'
+import Compare from '../views/Compare.vue'
 
 Vue.use(VueRouter)
 
@@ -74,6 +75,15 @@ const routes = [
       header: Header,
       footer: Footer,
       default: VideoCompare,
+    },
+  },
+  {
+    path: '/Compare',
+    name: 'Compare',
+    components: {
+      header: Header,
+      footer: Footer,
+      default: Compare,
     },
   },
 ]

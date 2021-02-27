@@ -71,7 +71,26 @@ const actions = {
     } finally {
       commit('LOADING_SET', false);
     }
-}
+  },
+  async getkeyframes({ commit }, payload) {
+    try {
+      commit('KEYLIST_SET', '');
+      commit('LOADING_SET', true);
+      await index.dispatch(
+        'api',
+        {
+          url: payload.url,
+          host: 'es2',
+        })
+          .then(() => {
+            commit('KEYLIST_SET', index.state.data);
+          })
+    } catch (err) {
+      console.log(err);
+    } finally {
+      commit('LOADING_SET', false);
+    }
+  }
 };
   
 export default {
